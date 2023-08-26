@@ -1,0 +1,103 @@
+footer{
+    color: white;
+    display: flex;
+    font-family: Poppins-regular;
+    width: 100%;
+    background-image: url('../images/map.png');
+    background-color: #171d21;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.footer-details{
+    padding: 15px;
+    margin-left: 100px;
+    height: 100%;
+    width: 80%;
+   
+}
+.footer-text{
+    font-weight: 700;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.knowmore{
+
+}
+.knowmore p{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.ul-list{
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+}
+.ul-list ul{
+    padding-right:30px;
+    line-height: 23px;
+    list-style: none;
+}
+.d-app{
+
+}
+.d-app p{
+    font-size: 18px;
+    text-align: right;
+    margin-bottom: 10px;
+}
+.av-apps img{
+    margin-left: 20px;
+}
+.footer-bottom{
+    text-align: center;
+}
+.footer-bottom p{
+    color: #7e7d7d;
+}
+.social-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+.social-icons i{
+    font-size: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.help-btn{
+    position: relative;
+    top: 270px;
+    left: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30, 172, 238);
+
+
+}
+.footer-head{
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-head i{
+    margin-right: 5px;
+    color: #4a4a4a;
+}
+.help-btn img{
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
+}
