@@ -70,9 +70,9 @@ footer{
     margin-right: 50px;
 }
 .help-btn{
-    position: relative;
-    top: 270px;
-    left: 20px;
+    position: fixed;
+    bottom:20px;
+    right: 20px;
     font-size: 16px;
     font-weight: 400;
     padding: 5px;
@@ -83,8 +83,13 @@ footer{
     justify-content: center;
     align-items: center;
     background-color: rgb(30, 172, 238);
+    cursor: pointer;
+    transition: 0.3s;
 
 
+}
+.help-btn:hover{
+    background-color: rgba(30, 172, 238, 0.747);
 }
 .footer-head{
     font-size: 14px;
