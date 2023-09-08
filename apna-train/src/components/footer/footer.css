@@ -3,7 +3,7 @@ footer{
     display: flex;
     font-family: Poppins-regular;
     width: 100%;
-    background-image: url('../images/map.png');
+    background-image: url('../../images/map.png');
     background-color: #171d21;
     background-position: center;
     background-repeat: no-repeat;

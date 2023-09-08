@@ -1,16 +1,16 @@
 import React from "react";
 import "./footer.css";
-import help from "../images/customer-support.png";
-import logo from "../images/logo.png";
-import appstore from "../images/appstore.png";
-import playstore from "../images/playstore.png";
+import help from "../../images/customer-support.png";
+import logo from "../../images/ApnaTrainLogo.png";
+import appstore from "../../images/appstore.png";
+import playstore from "../../images/playstore.png";
 
 function Footer() {
   return (
     <footer>
       <div className="footer-details">
         <div className="footer-head">
-          <img src={logo} alt="" />
+          <img src={logo} alt="" width="200px" />
           <p>
             <i class="fa fa-envelope"></i>
             amartya@test.com

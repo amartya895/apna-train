@@ -1,17 +1,17 @@
 import React from "react";
 import "./home.css";
-import bangalore from "../images/bangalore.jpeg";
-import chennai from "../images/chennai.jpeg";
-import delhi from "../images/delhi.jpeg";
-import mumbai from "../images/mumbai.jpeg";
-import ahmedabad from "../images/ahmedabad.png";
-import lucknow from "../images/lucknow.png";
-import patna from "../images/patna.png";
-import kolkata from "../images/kolkata.png";
-import varanasi from "../images/varanasi.png";
-import jaipur from "../images/jaipur.png";
-import agra from "../images/agra.png";
-import kerala from "../images/kerala.png";
+import bangalore from "../../images/bangalore.jpeg";
+import chennai from "../../images/chennai.jpeg";
+import delhi from "../../images/delhi.jpeg";
+import mumbai from "../../images/mumbai.jpeg";
+import ahmedabad from "../../images/ahmedabad.png";
+import lucknow from "../../images/lucknow.png";
+import patna from "../../images/patna.png";
+import kolkata from "../../images/kolkata.png";
+import varanasi from "../../images/varanasi.png";
+import jaipur from "../../images/jaipur.png";
+import agra from "../../images/agra.png";
+import kerala from "../../images/kerala.png";
 
 function Home() {
   return (
