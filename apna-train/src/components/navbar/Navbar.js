@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="row1-left">
           <div className="search-div">
             <input type="text" placeholder="Search your train " />
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <i className="fa fa-search" aria-hidden="true"></i>
           </div>
           <a href="/my-booking">
           <div className="nav-txt-div">
@@ -23,7 +23,7 @@ const Navbar = () => {
           <div className="nav-txt-div">
             <p>Login</p>
             <span>
-              <i class="fa fa-user"></i>
+              <i className="fa fa-user"></i>
             </span>
           </div>
           </a>
@@ -34,7 +34,7 @@ const Navbar = () => {
           <div className="nav-txt-div">
             <p>PNR Status</p>
             <span>
-              <i class="fa fa-ticket"></i>
+              <i className="fa fa-ticket"></i>
             </span>
           </div>
         </Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="nav-txt-div">
           <p>Coach Position</p>
           <span>
-            <i class="fa fa-train"></i>
+            <i className="fa fa-train"></i>
           </span>
         </div>
         </a>
@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="nav-txt-div">
           <p>Running Status</p>
           <span>
-            <i class="fa fa-location-arrow"></i>
+            <i className="fa fa-location-arrow"></i>
           </span>
         </div>
         </a>
@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="nav-txt-div">
           <p>Seat Availability</p>
           <span>
-            <i class="fa fa-bed"></i>
+            <i className="fa fa-bed"></i>
           </span>
         </div>
         </a>

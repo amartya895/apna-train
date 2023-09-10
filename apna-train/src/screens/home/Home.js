@@ -12,9 +12,11 @@ import varanasi from "../../images/varanasi.png";
 import jaipur from "../../images/jaipur.png";
 import agra from "../../images/agra.png";
 import kerala from "../../images/kerala.png";
+import TrainSearch from "../../components/trainSearch/TrainSearch";
 
 function Home() {
-  return (
+  return (<>
+      <TrainSearch/>
     <div className="des-sec">
       <div className="main-des">
         <div className="row1-des">
@@ -94,6 +96,7 @@ function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

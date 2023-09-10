@@ -1,0 +1,80 @@
+.findTrain-bg {
+  display: flex;
+  color: #fff;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(
+      24deg,
+      rgba(0, 0, 0, 0.8),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("./trainbg.jpeg");
+  height: 70vh;
+
+  justify-content: center;
+}
+.findTrain-content {
+  padding: 20px 0px;
+  width: 90%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  
+}
+.findTrain-content .irctc-partner {
+  text-align: center;
+}
+.irctc-partner p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 500;
+}
+.irctc-partner p img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+.irctc-partner h1 {
+  font-size: 60px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.findTrainBy {
+  margin-top: 30px;
+  width: 100%;
+  border-radius: 20px;
+ 
+}
+
+.at-features {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.feature-det {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 220px;
+}
+.feature-det p {
+  padding-left: 10px;
+  font-weight: 400;
+}
+
+.feature-icon {
+  display: flex;
+  border: 3px solid white;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}

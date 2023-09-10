@@ -12,7 +12,7 @@ function Footer() {
         <div className="footer-head">
           <img src={logo} alt="" width="200px" />
           <p>
-            <i class="fa fa-envelope"></i>
+            <i className="fa fa-envelope"></i>
             amartya@test.com
           </p>
         </div>
@@ -49,11 +49,11 @@ function Footer() {
         <div className="footer-bottom">
             <h3>Connect With Us</h3>
             <div className="social-icons">
-            <i class="fa fa-facebook"></i>
-            <i class="fa fa-instagram"></i>
-            <i class="fa fa-twitter"></i>
-            <i class="fa fa-youtube"></i>
-            <i class="fa fa-linkedin"></i>
+            <i className="fa fa-facebook"></i>
+            <i className="fa fa-instagram"></i>
+            <i className="fa fa-twitter"></i>
+            <i className="fa fa-youtube"></i>
+            <i className="fa fa-linkedin"></i>
             </div>
             <p>© Copy right 2014-2022, Stark Enterprises Private Limited </p>
         </div>
