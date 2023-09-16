@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./tabs.css";
 import TabContent from "./TabContent";
 import TabNavItem from "./TabNavitem";
+import axios from 'axios';
 import { allStations } from "../../data/station";
 
 function Tabs() {
@@ -58,54 +59,60 @@ function Tabs() {
 }
 export default Tabs;
 
-
 const Firsttab = () => {
-  const allStations = {
-    stations: ['NDLS-New Delhi', 'KGG-Khagaria', 'XYZ-SomeStation', /* ...other stations... */],
-  };
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredStations, setFilteredStations] = useState([]);
+  useEffect(()=>{
+    handleSearchStation();
+  },[]);
 
-  const handleSearchTrain = () => {
-    // Convert the station names to lowercase for case-insensitive search
-    const lowercaseSearchQuery = searchQuery.toLowerCase();
+  const handleSearchStation =async()=>{
 
-    // Filter the stations based on the search query
-    const filtered = allStations.stations.filter((stationName) =>
-      stationName.toLowerCase().includes(lowercaseSearchQuery)
-    );
+    const options = {
+      method: 'GET',
+      url: 'https://irctc1.p.rapidapi.com/api/v1/searchStation',
+      params: {query: 'NDLS'},
+      headers: {
+        'X-RapidAPI-Key': 'e7c413ef13msh7bd5b78f0648133p168b27jsn5fae32df1da9',
+        'X-RapidAPI-Host': 'irctc1.p.rapidapi.com'
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-    // Update the filtered stations in state
-    setFilteredStations(filtered);
-  };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter station name"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <button onClick={handleSearchTrain}>Search</button>
+    <>
+    </>
+    // <div>
+    //   <input
+    //     type="text"
+    //     placeholder="Enter station name"
+    //     value={searchQuery}
+    //     onChange={(e) => setSearchQuery(e.target.value)}
+    //   />
+    //   <button onClick={handleSearchTrain}>Search</button>
 
-      {filteredStations.length > 0 ? (
-        <div>
-          <p>Matching Stations:</p>
-          <ul>
-            {filteredStations.map((station, index) => (
-              <li key={index}>{station}</li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>No matching stations found.</p>
-      )}
-    </div>
+    //   {filteredStations.length > 0 ? (
+    //     <div>
+    //       <p>Matching Stations:</p>
+    //       <ul>
+    //         {filteredStations.map((station, index) => (
+    //           <li key={index}>{station}</li>
+    //         ))}
+    //       </ul>
+    //     </div>
+    //   ) : (
+    //     <p>No matching stations found.</p>
+    //   )}
+    // </div>
   );
 };
-
 
 const Secondtab = () => {
   return (
