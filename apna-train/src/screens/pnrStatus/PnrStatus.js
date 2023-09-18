@@ -1,5 +1,4 @@
 import React from "react";
-import "./pnrStatus.css";
 import TicketCard from "../../components/TicketCard";
 function PnrStatus() {
   return (
