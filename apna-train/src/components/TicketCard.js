@@ -8,7 +8,7 @@ const TicketCard = () => {
       <div className="w-full h-20 p-1 bg-red-200 rounded-t-lg flex justify-between items-center pl-20 pr-20 ">
         <h1 className="text-2xl font-normal ">Boarding Pass</h1>
         <div className="flex">
-          <img src={train} className="pr-2 w-10" />
+          <img src={train} alt="train" className="pr-2 w-10" />
           <h1 className="text-2xl">Train Ticket</h1>
         </div>
       </div>
@@ -54,7 +54,10 @@ const TicketCard = () => {
         <div className=""></div>
       </div>
       <div className="w-full h-20 p-1 bg-blue-300 rounded-b-lg flex justify-around items-center">
-      <img src={logo} alt="" width="100px" />
+      <img src={logo} alt="qrcode" width="100px" />
+
+      <div className=""></div>
+
         <div className="flex">
          
           <h1 className="text-gray-500">@Apna Train Wish you a Happy and safe journey</h1>
