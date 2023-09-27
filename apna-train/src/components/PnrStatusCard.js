@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 
-const PnrStatusCard = ({checkFunction}) => {
-    const [isChange , setIsChange] = useState(true)
-    const handleChange= ()=>{
-        checkFunction(false);
-    }
+const PnrStatusCard = ({ checkFunction }) => {
+  const [isChange, setIsChange] = useState(true);
+  const handleChange = () => {
+    checkFunction(false);
+  };
   return (
     <div className="">
-         <h1 className="text-4xl font-normal text-center">PNR Status </h1>
+      <h1 className="text-4xl font-normal text-center">PNR Status </h1>
       <div className="bg-slate-200 rounded-sm mt-10 p-6 shadow-sm">
         <div className="flex items-center">
           <p className="text-2xl font-medium pr-8">PNR : 2849395468</p>
-          <span className="text-orange-500 font-medium text-xl cursor-pointer" onClick={handleChange}>CHANGE PNR</span>
+          <span
+            className="text-orange-500 font-medium text-xl cursor-pointer"
+            onClick={handleChange}
+          >
+            CHANGE PNR
+          </span>
         </div>
         <div className="flex pr-8 mt-8 items-center">
           <p className="text-lg mr-2">16588 - BKN YPR EXP </p>
@@ -74,7 +79,7 @@ const PnrStatusCard = ({checkFunction}) => {
 
         <table className="w-full  mt-4 border-separate border-spacing-3">
           <thead className="text-gray-500 ">
-            <tr >
+            <tr>
               <th>S.No</th>
               <th>Current Status</th>
               <th>Booking Status </th>

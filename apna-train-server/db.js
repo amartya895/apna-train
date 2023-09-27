@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const mongoUrl = `mongodb+srv://amartyasen:${process.env.MONGODB_PASSWORD}@cluster0.tlqtekf.mongodb.net/apna-train`;
+const mongoUrl = `mongodb+srv://amartyasen895:${process.env.MONGODB_PASSWORD}@apnatraincluster.d1ryp3r.mongodb.net/APNA-TRAIN`;
 
 mongoose.connect(mongoUrl, {
   useUnifiedTopology: true,
