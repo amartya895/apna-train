@@ -1,17 +1,16 @@
-const express = require('express');
+import express from "express";
 
-const dbconfig = require('./db.js');
+import bookingRoute from "./routes/bookingRoute.js";
 
-const pnrStatusRoute = require('./routes/pnrStatusRoute.js');
+import dbconfig from "./db.js";
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use("/api/booking", bookingRoute);
 
-app.use('/api/pnr/',pnrStatusRoute);
-
-app.listen(port ,()=>{
-    console.log(`server is running on port ${port} `);
-})
+app.listen(port, () => {
+  console.log(`server is running on port ${port} `);
+});

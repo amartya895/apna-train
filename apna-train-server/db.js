@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
-const mongoUrl = `mongodb+srv://amartyasen895:${process.env.MONGODB_PASSWORD}@apnatraincluster.d1ryp3r.mongodb.net/APNA-TRAIN`;
+import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config();
+const mongoUrl = process.env.MONGODB_URL;
 
 mongoose.connect(mongoUrl, {
   useUnifiedTopology: true,
@@ -17,4 +18,4 @@ connection.on("connected", () => {
   console.log("Mongodb connected Successfully");
 });
 
-module.exports = mongoose;
+export default mongoose;
