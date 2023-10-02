@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./tabs.css";
 import TabContent from "./TabContent";
 import TabNavItem from "./TabNavitem";
-import axios from 'axios';
 import { allStations } from "../../data/station";
+import { allTrains } from "../../data/train";
+import Search from "../Search";
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -60,81 +61,69 @@ function Tabs() {
 export default Tabs;
 
 const Firsttab = () => {
-
-  useEffect(()=>{
-    handleSearchStation();
-  },[]);
-
-  const handleSearchStation =async()=>{
-
-    const options = {
-      method: 'GET',
-      url: 'https://irctc1.p.rapidapi.com/api/v1/searchStation',
-      params: {query: 'NDLS'},
-      headers: {
-        'X-RapidAPI-Key': 'e7c413ef13msh7bd5b78f0648133p168b27jsn5fae32df1da9',
-        'X-RapidAPI-Host': 'irctc1.p.rapidapi.com'
-      }
-    };
-    
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-
   return (
-    <>
-    </>
-    // <div>
-    //   <input
-    //     type="text"
-    //     placeholder="Enter station name"
-    //     value={searchQuery}
-    //     onChange={(e) => setSearchQuery(e.target.value)}
-    //   />
-    //   <button onClick={handleSearchTrain}>Search</button>
+    <div className="flex px-4 items-center">
+      <div className="">
+        <Search
+          searchData={allStations.stations}
+          placeholderText="Enter From Station"
+        />
+      </div>
+      <div className="bg-orange-100 p-2 rounded-full text-orange-500 mx-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+        />
+      </svg>
+      </div>
 
-    //   {filteredStations.length > 0 ? (
-    //     <div>
-    //       <p>Matching Stations:</p>
-    //       <ul>
-    //         {filteredStations.map((station, index) => (
-    //           <li key={index}>{station}</li>
-    //         ))}
-    //       </ul>
-    //     </div>
-    //   ) : (
-    //     <p>No matching stations found.</p>
-    //   )}
-    // </div>
+      <div className="">
+        <Search
+          searchData={allStations.stations}
+          placeholderText="Enter To Station"
+        />
+      </div>
+      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
+    </div>
   );
 };
 
 const Secondtab = () => {
   return (
-    <div className="FirstTab">
-      <p>Second Tab!! Hurray!!</p>
-      {/* First tab content will go here */}
-    </div>
+   <div className="flex w-full px-2">
+   <div className="w-full">
+   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
+   </div>
+   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
+   </div>
   );
 };
 const Thirdtab = () => {
   return (
-    <div className="FirstTab">
-      <p>Third Tab!! Hurray!!</p>
-      {/* First tab content will go here */}
-    </div>
+    <div className="flex w-full px-2">
+   <div className="w-full">
+   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
+   </div>
+   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
+   </div>
   );
 };
 const Fourthtab = () => {
   return (
-    <div className="FirstTab">
-      <p>Fourthtab Tab!! Hurray!!</p>
-      {/* First tab content will go here */}
-    </div>
+    <div className="flex w-full px-2">
+   <div className="w-full">
+   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
+   </div>
+   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
+   </div>
   );
 };
