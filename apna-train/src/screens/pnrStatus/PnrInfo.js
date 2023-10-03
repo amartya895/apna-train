@@ -18,11 +18,13 @@ const PnrInfo = () => {
 export default PnrInfo;
 
 const Reference = ({title , desc , color}) => {
+  const bgColorClass = `bg-${color}-500`;
+  const textColorClass = `text-${color}-500`;
   return (
     <>
       <div className="flex justify-between items-center pb-4">
-        <span className={`bg-${color}-500 w-1/4 h-8 rounded-full`}></span>
-        <span className={`text-${color}-500 text-left ml-10  w-1/4 text-xl font-bold`}>{title}</span>
+        <span className={bgColorClass+ "w-1/4 h-8 rounded-full"}></span>
+        <span className={textColorClass +"text-left ml-10  w-1/4 text-xl font-bold"}>{title}</span>
         <p className="text-gray-600 text-left w-4/5">{desc}</p>
       </div>
     </>

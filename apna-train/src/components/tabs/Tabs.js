@@ -5,6 +5,10 @@ import TabNavItem from "./TabNavitem";
 import { allStations } from "../../data/station";
 import { allTrains } from "../../data/train";
 import Search from "../Search";
+import SelectDate from "../SelectDate";
+
+// const {allStations} = lazy('../../data/station');
+// const {allTrains} = lazy('../../data/train');
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -62,7 +66,7 @@ export default Tabs;
 
 const Firsttab = () => {
   return (
-    <div className="flex px-4 items-center">
+    <div className="flex px-4 items-center justify-around">
       <div className="">
         <Search
           searchData={allStations.stations}
@@ -70,20 +74,20 @@ const Firsttab = () => {
         />
       </div>
       <div className="bg-orange-100 p-2 rounded-full text-orange-500 mx-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="w-6 h-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-        />
-      </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+          />
+        </svg>
       </div>
 
       <div className="">
@@ -92,38 +96,58 @@ const Firsttab = () => {
           placeholderText="Enter To Station"
         />
       </div>
-      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
+      <div className="ml-3">
+        <SelectDate />
+      </div>
+      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+        SEARCH
+      </button>
     </div>
   );
 };
 
 const Secondtab = () => {
   return (
-   <div className="flex w-full px-2">
-   <div className="w-full">
-   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
-   </div>
-   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
-   </div>
+    <div className="flex w-full px-2">
+      <div className="w-full">
+        <Search
+          searchData={allTrains.trains}
+          placeholderText="Enter Train No / Name"
+        />
+      </div>
+      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+        SEARCH
+      </button>
+    </div>
   );
 };
 const Thirdtab = () => {
   return (
     <div className="flex w-full px-2">
-   <div className="w-full">
-   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
-   </div>
-   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
-   </div>
+      <div className="w-full">
+        <Search
+          searchData={allTrains.trains}
+          placeholderText="Enter Train No / Name"
+        />
+      </div>
+      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+        SEARCH
+      </button>
+    </div>
   );
 };
 const Fourthtab = () => {
   return (
     <div className="flex w-full px-2">
-   <div className="w-full">
-   <Search searchData={allTrains.trains} placeholderText="Enter Train No / Name"/>
-   </div>
-   <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">SEARCH</button>
-   </div>
+      <div className="w-full">
+        <Search
+          searchData={allTrains.trains}
+          placeholderText="Enter Train No / Name"
+        />
+      </div>
+      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+        SEARCH
+      </button>
+    </div>
   );
 };

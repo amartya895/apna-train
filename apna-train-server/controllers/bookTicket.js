@@ -1,11 +1,6 @@
 import Ticket from "../models/ticketModel.js";
 
-const generatePnr = () => {
-  const timestamp = new Date().getTime();
-  const randomDigits = Math.floor(Math.random() * 100000);
-  const uniqueNumber = `${timestamp}${randomDigits}`.substring(0, 10);
-  return uniqueNumber.toString();
-};
+import {generateUniqueNo} from "./genralController.js"
 
 const allocateBerth = (age) => {
   const berthType = ["UB", "LB", "SL", "SU", "MB"];
@@ -26,7 +21,7 @@ const allocateBerth = (age) => {
 
 export const bookTicket = async (req, res) => {
   try {
-    const PNR = generatePnr();
+    const PNR = generateUniqueNo(10);
     const {
       fromStation,
       toStation,

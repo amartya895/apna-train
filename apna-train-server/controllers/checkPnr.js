@@ -19,8 +19,20 @@ export const checkPnrStatus=async(req , res)=>{
         return res.status(404).json({ message: "Ticket not found for the provided PNR number." });
   
       }
+
+      const pnrInfo = {
+        PNR : ticket.PNR,
+        trainName :"120018 - Avadh Assam Express",
+        fromStation : ticket.fromStation,
+        toStation : ticket.toStation,
+        dateOfJourney : ticket.dateOfJourney,
+        seatInfo : ticket.travellers.map((person)=>{
+          return person.berth[0];
+        }),
+
+      }
   
-      res.status(200).json(ticket);
+      res.status(200).json(pnrInfo);
   
     } catch (error) {
       res.status(400).json({ message: error.message });
