@@ -67,7 +67,7 @@ export default Tabs;
 const Firsttab = () => {
   return (
     <div className="flex px-4 items-center justify-around">
-      <div className="">
+      <div className="w-1/3">
         <Search
           searchData={allStations.stations}
           placeholderText="Enter From Station"
@@ -90,16 +90,16 @@ const Firsttab = () => {
         </svg>
       </div>
 
-      <div className="">
+      <div className="w-1/3">
         <Search
           searchData={allStations.stations}
           placeholderText="Enter To Station"
         />
       </div>
-      <div className="ml-3">
+      <div className="ml-3 w-1/5">
         <SelectDate />
       </div>
-      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+      <button className="bg-orange-400 p-3 h-11 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
         SEARCH
       </button>
     </div>

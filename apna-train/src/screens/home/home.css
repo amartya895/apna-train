@@ -6,7 +6,7 @@
 }
 .main-des {
   width: 80%;
-
+  z-index: -10;
   padding: 20px;
 }
 .row1-des {

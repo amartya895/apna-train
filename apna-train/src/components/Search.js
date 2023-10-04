@@ -3,17 +3,9 @@ import React, { useState } from "react";
 const Search = ({ searchData, placeholderText }) => {
   const [searchQuery, setSearchQuery] = useState();
 
-  // const [finalQuery, setFinalQuery] = useState();
-
   const handleOnChange = (e) => {
     setSearchQuery(e.target.value);
   };
-
-  // const handleSelectSearch=(item)=>{
-
-  //   setFinalQuery(item);
-
-  // }
 
   return (
     <>
@@ -44,7 +36,7 @@ const Search = ({ searchData, placeholderText }) => {
         )}
       </div>
       {searchQuery && (
-        <div className="w-full  px-2 py-2 z-10">
+        <div className="w-1/2  px-2 py-2 bg-orange-50">
           {searchData
             .filter((item) => {
               const query = searchQuery ? searchQuery.toLowerCase() : "";

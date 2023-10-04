@@ -15,7 +15,7 @@ ul.nav {
   align-items: center;
   margin: 10px 20px;
   justify-content: space-between;
-  border-bottom: 1px solid #969696;
+
   @media (max-width: 768px) {
     width: 90%;
   }
