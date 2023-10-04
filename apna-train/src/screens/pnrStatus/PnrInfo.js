@@ -6,10 +6,11 @@ const PnrInfo = () => {
       <h1 className="text-center text-2xl font-medium text-gray-500 mb-4">
         References
       </h1>
-      <ul className="">
+      <ul>
         <li><Reference title="CAN" desc="Your ticket status is cancelled" color="red" /></li>
         <li><Reference title="CNF" desc="Your ticket status is confirmed" color="green" /></li>
-        <li><Reference title="WL" desc="Your ticket status is in waiting list" color="yellow" /></li>
+        <li><Reference title="WL" desc="Your ticket status is in the waiting list" color="#fcba03" /></li>
+        <li><Reference title="RAC" desc="Your ticket status is in the Reservation against cancellation list" color="#4287f5" /></li>
       </ul>
     </div>
   );
@@ -17,16 +18,14 @@ const PnrInfo = () => {
 
 export default PnrInfo;
 
-const Reference = ({title , desc , color}) => {
-  const bgColorClass = `bg-${color}-500`;
-  const textColorClass = `text-${color}-500`;
+const Reference = ({ title, desc, color }) => {
+ 
+
   return (
-    <>
-      <div className="flex justify-between items-center pb-4">
-        <span className={bgColorClass+ "w-1/4 h-8 rounded-full"}></span>
-        <span className={textColorClass +"text-left ml-10  w-1/4 text-xl font-bold"}>{title}</span>
-        <p className="text-gray-600 text-left w-4/5">{desc}</p>
-      </div>
-    </>
+    <div className="flex justify-between items-center pb-4">
+      <span style={{background:color}} className="w-1/4 h-8 rounded-full"></span>
+      <span style={{color:color}} className="text-left ml-10 w-1/4 text-xl font-bold">{title}</span>
+      <p  className="text-gray-600 text-left w-4/5">{desc}</p>
+    </div>
   );
 };

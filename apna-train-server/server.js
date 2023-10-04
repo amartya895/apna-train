@@ -2,12 +2,24 @@ import express from "express";
 
 import bookingRoute from "./routes/bookingRoute.js";
 import trainRoute from "./routes/trainRoute.js";
+import cors from "cors";
 
 import dbconfig from "./db.js";
 
 const app = express();
 
 const port = process.env.PORT || 5000;
+
+app.use(
+  cors({
+    // origin: "https://renter-khaki.vercel.app", //this is for deployed version
+    origin: "http://localhost:3000", // this is for local development
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// app.use(cors());
 
 app.use(express.json());
 app.use("/api/booking", bookingRoute);

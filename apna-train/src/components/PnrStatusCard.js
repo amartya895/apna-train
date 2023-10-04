@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
-const PnrStatusCard = ({ checkFunction }) => {
+const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
   const [isChange, setIsChange] = useState(true);
   const handleChange = () => {
     checkFunction(false);
   };
+
+  const [trainNo, trainName] = pnrInfo.trainName.split("-");
+  // const [fromStationCode , fromStationName] = pnrInfo.fromStation.split('-');
+  // const [toStationCode , toStationName] = pnrInfo.toStation.split('-');
   return (
     <div className="">
       <h1 className="text-4xl font-normal text-center">PNR Status </h1>
       <div className="bg-slate-200 rounded-sm mt-10 p-6 shadow-sm">
         <div className="flex items-center">
-          <p className="text-2xl font-medium pr-8">PNR : 2849395468</p>
+          <p className="text-2xl font-medium pr-8">PNR :{pnrInfo.PNR}</p>
           <span
             className="text-orange-500 font-medium text-xl cursor-pointer"
             onClick={handleChange}
@@ -19,7 +23,9 @@ const PnrStatusCard = ({ checkFunction }) => {
           </span>
         </div>
         <div className="flex pr-8 mt-8 items-center">
-          <p className="text-lg mr-2">16588 - BKN YPR EXP </p>
+          <p className="text-lg mr-2">
+            {trainNo} - {trainName}{" "}
+          </p>
           <span className="w-14 h-10 bg-slate-400 ml-2 rounded-md flex justify-center items-center">
             <svg
               class="w-4 h-4 text-orange-300 mr-1"
@@ -34,7 +40,7 @@ const PnrStatusCard = ({ checkFunction }) => {
           </span>
         </div>
         <div className="text-base text-gray-500 mt-2 flex">
-          <p>Vasai Road - BSR, 13:55</p>
+          <p>{pnrInfo.fromStation}, 13:55</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -49,7 +55,7 @@ const PnrStatusCard = ({ checkFunction }) => {
               d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
           </svg>
-          <p> Bangalore Yesvantpur Junction - YPR, 15:45</p>
+          <p> {pnrInfo.toStation}, 15:45</p>
         </div>
         <p className="text-base text-gray-500 mt-2">
           Mon, 20 Nov | 3A | GN | Expected platform : 7
@@ -87,18 +93,16 @@ const PnrStatusCard = ({ checkFunction }) => {
             </tr>
           </thead>
           <tbody className="text-center text-lg">
-            <tr>
-              <td>1</td>
-              <td className="text-green-500">CNF | 27 | SL</td>
-              <td>WL/28</td>
-              <td>1A</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td className="text-green-500">CNF | 28 | SL</td>
-              <td>WL/29</td>
-              <td>1A</td>
-            </tr>
+            {pnrInfo.seatInfo.map((seat, index) => (
+              <tr key={index}>
+                <td>{index+1}</td>
+                <td className="text-green-500 text-left flex justify-center">
+                  CNF | {seat.seatNo} | {seat.seatType}
+                </td>
+                <td>WL/{28+index}</td>
+                <td>1A</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

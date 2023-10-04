@@ -66,7 +66,6 @@ const Search = ({ searchData, placeholderText }) => {
                 </div>
               );
             })}
-         
         </div>
       )}
     </>

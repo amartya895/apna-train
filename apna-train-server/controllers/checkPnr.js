@@ -22,7 +22,7 @@ export const checkPnrStatus=async(req , res)=>{
 
       const pnrInfo = {
         PNR : ticket.PNR,
-        trainName :"120018 - Avadh Assam Express",
+        trainName :"120018 - AVADH ASSAM EXP",
         fromStation : ticket.fromStation,
         toStation : ticket.toStation,
         dateOfJourney : ticket.dateOfJourney,
