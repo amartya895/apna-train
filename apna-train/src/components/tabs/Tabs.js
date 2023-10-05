@@ -6,9 +6,9 @@ import { allStations } from "../../data/station";
 import { allTrains } from "../../data/train";
 import Search from "../Search";
 import SelectDate from "../SelectDate";
-
-// const {allStations} = lazy('../../data/station');
-// const {allTrains} = lazy('../../data/train');
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addTrain } from "../../utils/trainDetailSlice";
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -99,25 +99,49 @@ const Firsttab = () => {
       <div className="ml-3 w-1/5">
         <SelectDate />
       </div>
-      <button className="bg-orange-400 p-3 h-11 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
-        SEARCH
-      </button>
     </div>
   );
 };
 
 const Secondtab = () => {
+  const dispatch = useDispatch();
+
+  const fetchTrainInfo = async (trainNo) => {
+    try {
+      console.log("Fetching train data");
+      const response = (
+        await axios.post("/api/train/details", { trainNo: trainNo })
+      ).data;
+
+      console.log(response, "success");
+
+      // Add this line to check if dispatch is called
+      console.log("Before dispatch");
+      dispatch(addTrain(response));
+      console.log("After dispatch");
+
+      console.log("train data dispatch");
+    } catch (error) {
+      console.log("fetching train data failed", error);
+    }
+  };
+
+  const getNumber = (trainNo) => {
+    console.log(trainNo);
+
+    fetchTrainInfo(trainNo);
+  };
+
   return (
     <div className="flex w-full px-2">
       <div className="w-full">
         <Search
+          sendTrainNo={getNumber}
           searchData={allTrains.trains}
           placeholderText="Enter Train No / Name"
+          pathTo="/train-details"
         />
       </div>
-      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
-        SEARCH
-      </button>
     </div>
   );
 };
@@ -130,9 +154,6 @@ const Thirdtab = () => {
           placeholderText="Enter Train No / Name"
         />
       </div>
-      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
-        SEARCH
-      </button>
     </div>
   );
 };
@@ -145,9 +166,6 @@ const Fourthtab = () => {
           placeholderText="Enter Train No / Name"
         />
       </div>
-      <button className="bg-orange-400 p-3 text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
-        SEARCH
-      </button>
     </div>
   );
 };

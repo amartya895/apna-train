@@ -1,20 +1,28 @@
 import React, { useState } from "react";
-
-const Search = ({ searchData, placeholderText }) => {
+import { Link } from "react-router-dom";
+const Search = ({ searchData, placeholderText, sendTrainNo, pathTo }) => {
   const [searchQuery, setSearchQuery] = useState();
+
+  const [val, setVal] = useState();
 
   const handleOnChange = (e) => {
     setSearchQuery(e.target.value);
+    setVal(e.target.value);
+  };
+
+  const handleSearch = () => {
+    const [code, name] = val.split("-");
+    sendTrainNo(code.trim());
   };
 
   return (
     <>
-      <div className="flex justify-center items-center border-gray-300 border-2 bg-slate-50 mx-1 px-2 rounded-md ">
+      <div className="flex justify-center items-center border-gray-300 border-2 bg-slate-50 mx-1 pl-2 rounded-md ">
         <input
           type="text"
           className="w-full border-none outline-none pl-2 pt-3 pb-3 bg-transparent"
           placeholder={placeholderText}
-          value={searchQuery}
+          value={val ? val : searchQuery}
           onChange={handleOnChange}
         />
         {searchQuery && (
@@ -25,7 +33,10 @@ const Search = ({ searchData, placeholderText }) => {
             strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 h-6 text-gray-400 cursor-pointer hover:text-orange-400"
-            onClick={(e) => setSearchQuery("")}
+            onClick={() => {
+              setSearchQuery("");
+              setVal("");
+            }}
           >
             <path
               strokeLinecap="round"
@@ -34,9 +45,18 @@ const Search = ({ searchData, placeholderText }) => {
             />
           </svg>
         )}
+        <Link to={pathTo}>
+          <button
+            className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2"
+            onClick={handleSearch}
+          >
+            SEARCH
+          </button>
+        </Link>
       </div>
+
       {searchQuery && (
-        <div className="w-1/2  px-2 py-2 bg-orange-50">
+        <div className="w-full px-2 py-2">
           {searchData
             .filter((item) => {
               const query = searchQuery ? searchQuery.toLowerCase() : "";
@@ -48,7 +68,14 @@ const Search = ({ searchData, placeholderText }) => {
             .map((item) => {
               const [itemName, itemCode] = item.split(" - ");
               return (
-                <div key={item} className="flex cursor-pointer border-b-2">
+                <div
+                  key={item}
+                  className="flex cursor-pointer border-b-2"
+                  onClick={() => {
+                    setVal(item);
+                    setSearchQuery("");
+                  }}
+                >
                   <span className="bg-orange-300 p-4 w-auto flex justify-center items-center rounded-lg mr-3 my-2">
                     {itemCode}
                   </span>

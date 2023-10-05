@@ -6,6 +6,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import PnrStatus from "./screens/pnrStatus/PnrStatus";
 import {Provider} from "react-redux"
 import store from "./utils/store";
+import TrainDetails from "./screens/TrainDetails";
 
 function App() {
   return (
@@ -31,7 +32,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "/pnr-status",
         element: <PnrStatus />,
-      },
+      },{
+        path:"/train-details",
+        element:<TrainDetails/>
+      }
     ],
   },
 ]);
