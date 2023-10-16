@@ -1,28 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-const Search = ({ searchData, placeholderText, sendTrainNo, pathTo }) => {
-  const [searchQuery, setSearchQuery] = useState();
+import { useDispatch } from "react-redux";
+import { getTrainNo } from "../utils/trainDetailSlice";
 
-  const [val, setVal] = useState();
+const Search = ({ searchData, placeholderText }) => {
+  const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleOnChange = (e) => {
     setSearchQuery(e.target.value);
-    setVal(e.target.value);
   };
 
-  const handleSearch = () => {
-    const [code, name] = val.split("-");
-    sendTrainNo(code.trim());
+  const handleSearch = (item) => {
+    const [code] = item.split(" - ");
+    setSearchQuery(item);
+    console.log(code);
+    dispatch(getTrainNo(code));
   };
 
   return (
     <>
-      <div className="flex justify-center items-center border-gray-300 border-2 bg-slate-50 mx-1 pl-2 rounded-md ">
+      <div className="flex justify-center items-center border-gray-300 border-2 bg-slate-50 mx-1 pl-2 rounded-md">
         <input
           type="text"
           className="w-full border-none outline-none pl-2 pt-3 pb-3 bg-transparent"
           placeholder={placeholderText}
-          value={val ? val : searchQuery}
+          value={searchQuery}  
           onChange={handleOnChange}
         />
         {searchQuery && (
@@ -35,7 +37,6 @@ const Search = ({ searchData, placeholderText, sendTrainNo, pathTo }) => {
             className="w-6 h-6 text-gray-400 cursor-pointer hover:text-orange-400"
             onClick={() => {
               setSearchQuery("");
-              setVal("");
             }}
           >
             <path
@@ -45,14 +46,6 @@ const Search = ({ searchData, placeholderText, sendTrainNo, pathTo }) => {
             />
           </svg>
         )}
-        <Link to={pathTo}>
-          <button
-            className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2"
-            onClick={handleSearch}
-          >
-            SEARCH
-          </button>
-        </Link>
       </div>
 
       {searchQuery && (
@@ -72,8 +65,7 @@ const Search = ({ searchData, placeholderText, sendTrainNo, pathTo }) => {
                   key={item}
                   className="flex cursor-pointer border-b-2"
                   onClick={() => {
-                    setVal(item);
-                    setSearchQuery("");
+                    handleSearch(item);
                   }}
                 >
                   <span className="bg-orange-300 p-4 w-auto flex justify-center items-center rounded-lg mr-3 my-2">
