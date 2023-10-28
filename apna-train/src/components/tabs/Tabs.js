@@ -139,7 +139,6 @@ const Secondtab = () => {
         <Search
           searchData={allTrains.trains}
           placeholderText="Enter Train No / Name"
-          pathTo="/train-details"
         />
       </div>
       <Link to={`/train-search/${trainno}`}>

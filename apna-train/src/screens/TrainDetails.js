@@ -75,21 +75,21 @@ const TrainDetails = () => {
 
   return (
     <div className="flex items-center justify-center p-6 border-orange-100">
-      <div className="bg-slate-100 min-h-screen w-4/5 p-2">
+      <div className="bg-slate-100 min-h-screen w-4/5 px-6">
         <div className="flex justify-around py-6 ">
           {trainDetCard.map((card) => (
             <Link to={card.path} key={card.path}>
               <div onClick={() => handleCardClick(card.path)}
                 className={`${
                   activeCard === card.path ? "bg-orange-400" : "bg-gray-400"
-                } rounded-md p-8 w-48 font-normal text-lg flex items-center flex-col text-white hover:bg-blue-400 duration-400`}>
+                } rounded-md p-8 cursor-pointer w-48 font-normal text-lg flex items-center flex-col text-white duration-400`}>
                 {card.svg}
                 <p className="mt-2">{card.name}</p>
               </div>
             </Link>
           ))}
         </div>
-        <Outlet />
+        <Outlet/>
       </div>
     </div>
   );
