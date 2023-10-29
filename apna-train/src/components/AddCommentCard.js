@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {addTrainReview} from "../utils/trainDetailSlice";
 import "react-toastify/dist/ReactToastify.css";
 const AddCommentCard = ({ currentUser}) => {
   const [text, setText] = useState();
   const trainNumber = useSelector((state) => state.trainDetail.trainno[0]);
+  const dispatch = useDispatch();
   const onSend = async () => {
     try {
       const reviewDet = {
@@ -16,6 +18,14 @@ const AddCommentCard = ({ currentUser}) => {
         },
       };
       const resp = await axios.post("/api/train/comment", reviewDet);
+    dispatch(addTrainReview({
+      userName: currentUser,
+      comment: text,
+      rating:4,
+      dateOfReview:Date.now()
+    }));
+
+    setText("");
       
       toast.success(`Response: ${resp.data}`, { position: toast.POSITION.TOP_RIGHT });
     } catch (error) {

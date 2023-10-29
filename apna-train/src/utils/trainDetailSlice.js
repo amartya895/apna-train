@@ -14,12 +14,15 @@ const trainDetailSlice = createSlice({
         getTrainNo:(state , action)=>{
             state.trainno=[];
             state.trainno.push(action.payload);
+        },
+        addTrainReview:(state , action)=>{
+            state.trains[0].reviews[0].userReviews.push(action.payload);
         }
         
     },
 });
 
 
-export const {addTrain , getTrainNo} = trainDetailSlice.actions;
+export const {addTrain , getTrainNo , addTrainReview} = trainDetailSlice.actions;
 
 export default trainDetailSlice.reducer;

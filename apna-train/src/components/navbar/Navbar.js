@@ -6,9 +6,12 @@ const Navbar = () => {
   return (
     <nav>
       <div className="row-1">
+        <Link to="/">
         <div className="logo-img">
           <img src={logo} alt="" width="150px" />
         </div>
+        </Link>
+       
         <div className="row1-left">
           <div className="search-div">
             <input type="text" placeholder="Search your train " />
@@ -19,14 +22,14 @@ const Navbar = () => {
             <p>My Booking</p>
           </div>
           </a>
-          <a href="/login">
+          <Link to="/login">
           <div className="nav-txt-div">
             <p>Login</p>
             <span>
               <i className="fa fa-user"></i>
             </span>
           </div>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="row-1 row-2">

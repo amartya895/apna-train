@@ -4,9 +4,9 @@ import { timeConvert, starCount } from "../utils/generalFunc.js";
 const ReviewCard = ({ username, review, star, time }) => {
   const reviewDate = timeConvert(time);
   return (
-    <div class="max-h-screen bg-gray-100 flex mt-10 justify-center">
-      <div class="px-10">
-        <div class="bg-white  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500">
+    <div className="max-h-screen bg-gray-100 flex mt-10 justify-center">
+      <div className="px-10">
+        <div className="bg-white  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -20,12 +20,12 @@ const ReviewCard = ({ username, review, star, time }) => {
             />
           </svg>
 
-          <div class="mt-4">
-            <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
+          <div className="mt-4">
+            <h1 className="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
               {username}
             </h1>
-            <div class="flex mt-2">{starCount(star)}</div>
-            <p class="mt-4 text-md text-gray-600">
+            <div className="flex mt-2">{starCount(star)}</div>
+            <p className="mt-4 text-md text-gray-600">
               {review}
               But I must explain to you how all this mistaken idea of denouncing
               pleasure and praising pain was born and I will give you a complete

@@ -18,7 +18,7 @@ const Reviews = () => {
             <p className="flex mt-2">
               {starCount(trainDet.reviews[0].punctuality)}
             </p>
-            <p className="w-10 h-10 bg-orange-200 rounded-full flex justify-center items-center mt-2">
+            <p className="w-12 h-12 p-2 bg-orange-200 rounded-full flex justify-center items-center mt-2">
               {Number(trainDet.reviews[0].punctuality).toFixed(1)}
             </p>
           </div>
@@ -29,7 +29,7 @@ const Reviews = () => {
             <p className="flex mt-2">
               {starCount(trainDet.reviews[0].cleanliness)}
             </p>
-            <p className="w-10 h-10 bg-orange-200 rounded-full flex justify-center items-center mt-2">
+            <p className="w-12 h-12 p-2 bg-orange-200 rounded-full flex justify-center items-center mt-2">
               {Number(trainDet.reviews[0].cleanliness).toFixed(1)}
             </p>
           </div>
@@ -40,14 +40,14 @@ const Reviews = () => {
             <p className="flex mt-2">
               {starCount(trainDet.reviews[0].food)}
             </p>
-            <p className="w-10 h-10 bg-orange-200 rounded-full flex justify-center items-center mt-2">
+            <p className="w-12 h-12 p-2 bg-orange-200 rounded-full flex justify-center items-center mt-2">
               {Number(trainDet.reviews[0].food).toFixed(1)}
             </p>
           </div>
         </div>
       </div>
       {userReviews.map((review) => (
-        <div className="mb-9" key={review.id}>
+        <div className="mb-9" key={review.dateOfReview}>
           <ReviewCard
             username={review.userName}
             review={review.comment}
@@ -57,7 +57,7 @@ const Reviews = () => {
         </div>
       ))}
       <div className="px-10 mt-3">
-      <AddCommentCard currentUser="Rahul"/>
+      <AddCommentCard currentUser="Santosh"/>
       </div>
     </>
   );
