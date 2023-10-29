@@ -8,6 +8,7 @@ const trainDetailSlice = createSlice({
     },
     reducers: {
         addTrain: (state, action) => {
+            state.trains=[];
             state.trains.push(action.payload); 
         },
         getTrainNo:(state , action)=>{

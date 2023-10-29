@@ -1,35 +1,30 @@
 import React from "react";
-import { timeConvert } from "../utils/generalFunc.js";
+import { timeConvert, starCount } from "../utils/generalFunc.js";
 
 const ReviewCard = ({ username, review, star, time }) => {
   const reviewDate = timeConvert(time);
   return (
-    <div class="min-h-screen bg-gray-100 flex mt-10 justify-center">
+    <div class="max-h-screen bg-gray-100 flex mt-10 justify-center">
       <div class="px-10">
         <div class="bg-white  rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1036&q=80"
-            alt=""
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-10 h-10"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+              clipRule="evenodd"
+            />
+          </svg>
 
           <div class="mt-4">
             <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
               {username}
             </h1>
-            <div class="flex mt-2">
-              {Array.from({ length: star }).map((_, index) => (
-                <svg
-                  key={index}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-yellow-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
+            <div class="flex mt-2">{starCount(star)}</div>
             <p class="mt-4 text-md text-gray-600">
               {review}
               But I must explain to you how all this mistaken idea of denouncing

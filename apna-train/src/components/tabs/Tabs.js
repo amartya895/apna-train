@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./tabs.css";
 import TabContent from "./TabContent";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import SelectDate from "../SelectDate";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrain } from "../../utils/trainDetailSlice";
+
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
   return (
@@ -111,6 +112,8 @@ const Secondtab = () => {
 
   const trainno = useSelector((state) => state.trainDetail.trainno[0]);
 
+  
+
   const fetchTrainInfo = async (trainNo) => {
     try {
       console.log("Fetching train data");
@@ -132,6 +135,10 @@ const Secondtab = () => {
     console.log(trainno);
     fetchTrainInfo(trainno);
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
   return (
     <div className="flex w-full px-2">

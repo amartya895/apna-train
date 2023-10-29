@@ -5,20 +5,23 @@ import Navbar from "./components/navbar/Navbar";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import PnrStatus from "./screens/pnrStatus/PnrStatus";
 import {Provider} from "react-redux"
-import store from "./utils/store";
+import {store , persistor} from "./utils/store";
 import TrainDetails from "./screens/TrainDetails";
 import SeatAvailability from "./components/SeatAvailability";
 import RunningStatus from "./components/RunningStatus";
 import Timetable from "./components/Timetable";
 import Reviews from "./components/Reviews";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
       <Navbar />
       <Outlet />
       <Footer />
+      </PersistGate>
       </Provider>
     </div>
   );
