@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
-  const [isChange, setIsChange] = useState(true);
   const handleChange = () => {
     checkFunction(false);
   };

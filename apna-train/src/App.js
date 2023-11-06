@@ -13,6 +13,7 @@ import Timetable from "./components/Timetable";
 import Reviews from "./components/Reviews";
 import { PersistGate } from "redux-persist/integration/react";
 import Login from "./screens/Login"
+import Signup from "./screens/Signup";
 
 function App() {
   return (
@@ -64,6 +65,10 @@ export const appRouter = createBrowserRouter([
       },{
         path:"/login",
         element:<Login/>
+      },
+      {
+        path:"/signup",
+        element:<Signup/>
       }
     ],
   },

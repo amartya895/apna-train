@@ -10,6 +10,9 @@ import SelectDate from "../SelectDate";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrain } from "../../utils/trainDetailSlice";
+import  { DatePickerProps } from 'antd';
+import { DatePicker, Space } from 'antd';
+
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -66,6 +69,10 @@ function Tabs() {
 export default Tabs;
 
 const Firsttab = () => {
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+  
   return (
     <div className="flex px-4 items-center justify-around">
       <div className="w-1/3">
@@ -98,7 +105,11 @@ const Firsttab = () => {
         />
       </div>
       <div className="ml-3 w-1/5">
-        <SelectDate />
+     
+      <DatePicker onChange={onChange}
+      className="h-12 w-full  px-8 text-xl" />
+      
+      
       </div>
       <button className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
         SEARCH
@@ -138,7 +149,7 @@ const Secondtab = () => {
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  });
 
   return (
     <div className="flex w-full px-2">
