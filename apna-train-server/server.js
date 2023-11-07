@@ -2,6 +2,7 @@ import express from "express";
 
 import bookingRoute from "./routes/bookingRoute.js";
 import trainRoute from "./routes/trainRoute.js";
+import userRoute from "./routes/userRoute.js"
 import cors from "cors";
 
 import dbconfig from "./db.js";
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/api/booking", bookingRoute);
 app.use("/api/pnr",bookingRoute);
 app.use("/api/train" , trainRoute);
+app.use("/api/auth" , userRoute);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port} `);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom"
+import axios from "axios";
 
 const Signup = () => {
     const [username , setUsername] = useState();
@@ -8,7 +9,14 @@ const Signup = () => {
     const [cPassword , setCPassword] = useState();
 
     const handleOnSignup =()=>{
-        console.log(username ,email , password , cPassword)
+        // if(cPassword == password)
+        // {
+        //     try {
+        //         const data = axios.post()
+        //     } catch (error) {
+                
+        //     }
+        // }
     }
 
   return (
