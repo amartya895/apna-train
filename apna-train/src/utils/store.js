@@ -5,6 +5,7 @@ import trainDetailSlice from "./trainDetailSlice";
 import storage from "redux-persist/lib/storage"; // This defaults to localStorage for web
 
 const persistConfig = {
+    
     key: "root", // you can change this to a unique key
     storage,
   };
