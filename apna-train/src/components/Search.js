@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getTrainNo } from "../utils/trainDetailSlice";
+import {
+  getJourneyStation,
+  getTrainNo,
+} from "../utils/trainDetailSlice";
 
 const Search = ({ searchData, placeholderText }) => {
   const dispatch = useDispatch();
@@ -11,10 +14,11 @@ const Search = ({ searchData, placeholderText }) => {
   };
 
   const handleSearch = (item) => {
-    const [code] = item.split(" - ");
+    const [code, name] = item.split(" - ");
     setSearchQuery(item);
-    console.log(code);
+    console.log(code, name);
     dispatch(getTrainNo(code));
+    dispatch(getJourneyStation(code));
   };
 
   return (
@@ -24,7 +28,7 @@ const Search = ({ searchData, placeholderText }) => {
           type="text"
           className="w-full border-none outline-none pl-2 pt-3 pb-3 bg-transparent"
           placeholder={placeholderText}
-          value={searchQuery}  
+          value={searchQuery}
           onChange={handleOnChange}
         />
         {searchQuery && (

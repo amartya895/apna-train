@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./tabs.css";
 import TabContent from "./TabContent";
 import { Link } from "react-router-dom";
@@ -9,10 +9,10 @@ import Search from "../Search";
 import SelectDate from "../SelectDate";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addTrain } from "../../utils/trainDetailSlice";
-import  { DatePickerProps } from 'antd';
-import { DatePicker, Space } from 'antd';
-
+import { addTrain, getTrainBetweenStation } from "../../utils/trainDetailSlice";
+import { DatePickerProps } from "antd";
+import { DatePicker, Space } from "antd";
+import {useNavigate} from "react-router-dom";
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -69,10 +69,43 @@ function Tabs() {
 export default Tabs;
 
 const Firsttab = () => {
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [journeyDate, setJourneyDate] = useState();
+
+  const fromStation = useSelector(
+    (state) => state.trainDetail.journeyStations[0]
+  );
+  const toStation = useSelector(
+    (state) => state.trainDetail.journeyStations[1]
+  );
+  const onDateChange = (date, dateString) => {
+    setJourneyDate(dateString);
+    console.log(fromStation, toStation);
   };
-  
+
+  const handleSearchTrainBetweenStation = async () => {
+    const journeyDet = {
+      fromStation,
+      toStation,
+    };
+
+    try {
+      const result = (await axios.post("/api/train/trainbetweenstation", journeyDet)).data;
+
+      console.log(result);
+      dispatch(getTrainBetweenStation(result));
+      
+      if(result)
+      {
+        navigate(`/trainBetween/${fromStation}/${toStation}`)
+      }
+
+    } catch (error) {
+      console.log("Something went Wrong");
+    }
+  };
+
   return (
     <div className="flex px-4 items-center justify-around">
       <div className="w-1/3">
@@ -105,13 +138,15 @@ const Firsttab = () => {
         />
       </div>
       <div className="ml-3 w-1/5">
-     
-      <DatePicker onChange={onChange}
-      className="h-12 w-full  px-8 text-xl" />
-      
-      
+        <DatePicker
+          onChange={onDateChange}
+          className="h-12 w-full  px-8 text-xl"
+        />
       </div>
-      <button className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+      <button
+        className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2"
+        onClick={handleSearchTrainBetweenStation}
+      >
         SEARCH
       </button>
     </div>
@@ -122,8 +157,6 @@ const Secondtab = () => {
   const dispatch = useDispatch();
 
   const trainno = useSelector((state) => state.trainDetail.trainno[0]);
-
-  
 
   const fetchTrainInfo = async (trainNo) => {
     try {
