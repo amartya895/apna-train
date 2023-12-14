@@ -6,7 +6,7 @@ const trainDetailSlice = createSlice({
     trains: [],
     trainno: [],
     journeyStations: [],
-    trainsBetween:[],
+    trainsBetween: [],
   },
   reducers: {
     addTrain: (state, action) => {
@@ -21,16 +21,28 @@ const trainDetailSlice = createSlice({
       state.trains[0].reviews[0].userReviews.push(action.payload);
     },
     getJourneyStation: (state, action) => {
-      state.journeyStations.push(action.payload);
+      const newStation = action.payload;
+
+      if (state.journeyStations.length < 2) {
+        state.journeyStations.push(newStation);
+      } else {
+        state.journeyStations = [];
+        state.journeyStations.push(newStation);
+      }
     },
-    getTrainBetweenStation:(state,action)=>{
-      state.trainsBetween=[];
+    getTrainBetweenStation: (state, action) => {
+      state.trainsBetween = [];
       state.trainsBetween.push(action.payload);
-    }
+    },
   },
 });
 
-export const { addTrain, getTrainNo, addTrainReview, getJourneyStation,getTrainBetweenStation } =
-  trainDetailSlice.actions;
+export const {
+  addTrain,
+  getTrainNo,
+  addTrainReview,
+  getJourneyStation,
+  getTrainBetweenStation,
+} = trainDetailSlice.actions;
 
 export default trainDetailSlice.reducer;
