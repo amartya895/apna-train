@@ -1,26 +1,38 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import TrainView from "../components/TrainView";
+import { Firsttab } from "../components/tabs/Tabs";
+import { useParams } from "react-router-dom";
 
 const TrainBetween = () => {
   const trainBetw = useSelector((state) => state.trainDetail.trainsBetween[0]);
   const [fromStation, toStation] = useSelector(
     (state) => state.trainDetail.journeyStations
   );
+  const { date } = useParams();
 
   return (
-    <div>
-      <h1>From Station : {fromStation}</h1>
-      <h1>To Station : {toStation}</h1>
+    <div className="flex flex-col justify-center items-center">
+      <div className="">
+        <h1 className="my-4 text-3xl">
+          Showing total {trainBetw.length} train from {fromStation} to {toStation} on {date}
+        </h1>
+      </div>
+      <div className="mt-4 w-full">
+        <Firsttab />
+      </div>
       {trainBetw &&
         trainBetw.map((train, index) => {
-          // Splitting each train number and name using the '-' delimiter
           const [number, name] = train.split("-");
-          
+
           return (
-            <div key={index}>
-              <p>Train Number: {number}</p>
-              <p>Train Name: {name}</p>
-            </div>
+            <TrainView
+              key={index}
+              trainName={name}
+              trainNo={number}
+              fromStation={fromStation}
+              toStation={toStation}
+            />
           );
         })}
     </div>

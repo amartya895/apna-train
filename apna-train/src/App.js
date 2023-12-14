@@ -66,7 +66,7 @@ export const appRouter = createBrowserRouter([
         ],
       },
       {
-        path:"/trainBetween/:from/:to",
+        path:"/trainBetween/:from/:to/:date",
         element:<TrainBetween/>
       },
       {

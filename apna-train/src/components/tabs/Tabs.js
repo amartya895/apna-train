@@ -68,7 +68,7 @@ function Tabs() {
 }
 export default Tabs;
 
-const Firsttab = () => {
+export const Firsttab = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [journeyDate, setJourneyDate] = useState();
@@ -98,7 +98,7 @@ const Firsttab = () => {
       
       if(result)
       {
-        navigate(`/trainBetween/${fromStation}/${toStation}`)
+        navigate(`/trainBetween/${fromStation}/${toStation}/${journeyDate}`)
       }
 
     } catch (error) {
