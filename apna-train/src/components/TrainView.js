@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const TrainView = ({ trainName, trainNo, fromStation, toStation }) => {
   const generateRandomPrice = () =>
@@ -121,7 +122,9 @@ const SeatType = ({ type, price }) => {
         <p>&#8377; {price}</p>
       </div>
       <p className="font-light mt-2">Tap to refresh</p>
-      <p className="text-blue-400 font-normal text-sm mt-2">Book now</p>
+      <Link to="/booknow">
+        <p className="text-blue-400 font-normal text-sm mt-2">Book now</p>
+      </Link>
     </div>
   );
 };

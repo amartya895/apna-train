@@ -15,6 +15,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import TrainBetween from "./screens/TrainBetween";
+import Booknow from "./screens/Booknow";
 
 function App() {
   return (
@@ -77,6 +78,10 @@ export const appRouter = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
+      {
+        path:"/booknow",
+        element:<Booknow/>
+      }
     ],
   },
 ]);
