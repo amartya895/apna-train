@@ -7,7 +7,8 @@ import AddCommentCard from "./AddCommentCard";
 const Reviews = () => {
   const trainDet = useSelector((state) => state.trainDetail.trains[0]);
   const userReviews = trainDet.reviews[0].userReviews;
- 
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const userName = currentUser ? currentUser.user.username : null;
 
   return (
     <>
@@ -35,11 +36,9 @@ const Reviews = () => {
           </div>
         </div>
         <div>
-        <div className="text-lg font-semibold flex flex-col items-center">
+          <div className="text-lg font-semibold flex flex-col items-center">
             <p>Food</p>
-            <p className="flex mt-2">
-              {starCount(trainDet.reviews[0].food)}
-            </p>
+            <p className="flex mt-2">{starCount(trainDet.reviews[0].food)}</p>
             <p className="w-12 h-12 p-2 bg-orange-200 rounded-full flex justify-center items-center mt-2">
               {Number(trainDet.reviews[0].food).toFixed(1)}
             </p>
@@ -57,7 +56,7 @@ const Reviews = () => {
         </div>
       ))}
       <div className="px-10 mt-3">
-      <AddCommentCard currentUser="Santosh"/>
+        {userName && <AddCommentCard currentUser={userName} />}
       </div>
     </>
   );

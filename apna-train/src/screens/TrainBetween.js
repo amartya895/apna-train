@@ -15,7 +15,8 @@ const TrainBetween = () => {
     <div className="flex flex-col justify-center items-center">
       <div className="">
         <h1 className="my-4 text-3xl">
-          Showing total {trainBetw.length} train from {fromStation} to {toStation} on {date}
+          Showing total {trainBetw.length} train from {fromStation} to{" "}
+          {toStation} on {date}
         </h1>
       </div>
       <div className="mt-4 w-full">
@@ -32,6 +33,7 @@ const TrainBetween = () => {
               trainNo={number}
               fromStation={fromStation}
               toStation={toStation}
+              doj={date}
             />
           );
         })}

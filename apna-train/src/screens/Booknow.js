@@ -1,8 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Booknow = () => {
+  const [fName, setFName] = useState("");
+  const [age, setAge] = useState("");
+  const [berthPref, setBerthPref] = useState("No Preference");
+  const [gender, setGender] = useState("");
+  const [nationality, setNationality] = useState("India");
+  const [mobNum, setMobNum] = useState("");
+  const [email, setEmail] = useState("");
+  const {
+    trainName,
+    type,
+    price,
+    fromStation,
+    toStation,
+    doj,
+    randomStartTime,
+  } = useSelector((state) => state.trainDetail.bookTrainDet[0]);
+
+  const userId = JSON.parse(localStorage.getItem('currentUser')).user._id;
+
+
+  const handleClick = () => {
+    console.log(
+      trainName,
+      type,
+      price,
+      fromStation,
+      toStation,
+      doj,
+      fName,
+      age,
+      berthPref,
+      gender,
+      nationality,
+      mobNum,
+      email
+    );
+  };
+
+  const handleSaveTraveller = async () => {
+    console.log(userId);
+    try {
+      const travellerDetails = {
+        FullName: fName,
+        Age: age,
+        Gender: gender,
+        Nationality: nationality,
+        BerthPref: berthPref,
+      };
+
+      const result = await axios.post("/api/user/addTraveller", {
+        userId,
+        travellerDetails,
+      });
+
+      if (result.status === 200) {
+        setAge("");
+        setFName("");
+        setNationality("India")
+        setBerthPref("No Preference")
+        console.log("Traveller details saved successfully");
+       
+        alert("Traveller details saved successfully")
+      } else {
+        console.error("Error saving traveller details");
+        
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle other errors
+    }
+  };
+
   return (
     <div className="bg-gray-200  flex justify-center w-screen">
+      {/* <button onClick={handleClick}>click me</button> */}
       <div className="w-2/3 p-4">
         <p className="text-xl font-medium text-orange-500">Passenger Details</p>
         <div className="flex justify-between  mt-3">
@@ -14,12 +89,12 @@ const Booknow = () => {
             </div>
           </div>
           <div className="w-1/3 bg-white shadow-sm ml-4 p-3 rounded-md">
-            <p className="font-medium ">GOLDEN TEMPLE M</p>
+            <p className="font-medium ">{trainName}</p>
             <span className="text-gray-800">Journey Date : </span>
-            <span>31-12-2023</span>
+            <span>{doj}</span>
 
             <div className="flex items-center mt-2 text-gray-600">
-              <p className="mr-2">NZM</p>
+              <p className="mr-2">{fromStation}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -35,7 +110,7 @@ const Booknow = () => {
                 />
               </svg>
 
-              <p className="ml-2">MMCT</p>
+              <p className="ml-2">{toStation}</p>
             </div>
           </div>
         </div>
@@ -43,7 +118,7 @@ const Booknow = () => {
           <p className="text-base font-medium text-gray-600">BOARDING POINT</p>
           <div className="mt-4">
             <span className="text-gray-400 mr-6">
-              H NIZAMUDDIN ( NZM), 31 Dec , 04:00
+              {fromStation}, {doj} , {randomStartTime}
             </span>
             <span className="text-orange-300">Edit</span>
           </div>
@@ -58,6 +133,8 @@ const Booknow = () => {
                 type="radio"
                 name="gender"
                 id=""
+                checked={gender === "Male"}
+                onChange={() => setGender("Male")}
                 className="mr-2 w-6 h-6 accent-orange-400 cursor-pointer"
               />
               <label htmlFor="">Male</label>
@@ -67,6 +144,8 @@ const Booknow = () => {
                 type="radio"
                 name="gender"
                 id=""
+                checked={gender === "Female"}
+                onChange={() => setGender("Female")}
                 className="mr-2 w-6 h-6 accent-orange-400 cursor-pointer"
               />
               <label htmlFor="">Female</label>
@@ -76,6 +155,8 @@ const Booknow = () => {
                 type="radio"
                 name="gender"
                 id=""
+                checked={gender === "Transgender"}
+                onChange={() => setGender("Transgender")}
                 className="mr-2 w-6 h-6 accent-orange-400 cursor-pointer"
               />
               <label htmlFor="">Transgender</label>
@@ -91,6 +172,8 @@ const Booknow = () => {
                 type="text"
                 name="fName"
                 id=""
+                value={fName}
+                onChange={(e) => setFName(e.target.value)}
                 placeholder="Enter Full Name"
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
               />
@@ -105,6 +188,8 @@ const Booknow = () => {
               <input
                 type="text"
                 name="age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
                 placeholder="Enter Age"
                 id=""
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
@@ -119,6 +204,8 @@ const Booknow = () => {
               <select
                 name=""
                 id=""
+                value={berthPref}
+                onChange={(e) => setBerthPref(e.target.value)}
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
               >
                 <option value="No Preference">No Berth Preference</option>
@@ -136,6 +223,8 @@ const Booknow = () => {
               <select
                 name=""
                 id=""
+                value={nationality}
+                onChange={(e) => setNationality(e.target.value)}
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
               >
                 <option value="India">India</option>
@@ -152,7 +241,10 @@ const Booknow = () => {
             <button className="px-4 py-2 bg-red-100 rounded mr-2 text-red-600">
               Delete
             </button>
-            <button className="px-4 py-2 bg-orange-400 rounded mr-2 text-white">
+            <button
+              className="px-4 py-2 bg-orange-400 rounded mr-2 text-white"
+              onClick={handleSaveTraveller}
+            >
               Save
             </button>
           </div>
@@ -171,6 +263,8 @@ const Booknow = () => {
                 type="text"
                 name="mob"
                 id=""
+                value={mobNum}
+                onChange={(e) => setMobNum(e.target.value)}
                 placeholder="Enter Mobile Number"
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
               />
@@ -184,6 +278,8 @@ const Booknow = () => {
                 name="email"
                 placeholder="Enter Email ID"
                 id=""
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="outline-none bg-orange-100 py-4 px-3 rounded-md text-gray-400 text-base"
               />
             </div>
@@ -216,7 +312,10 @@ const Booknow = () => {
             </span>
           </label>
         </div>
-        <button className="bg-orange-400 text-white text-lg w-2/3 py-4 rounded-md mt-4">
+        <button
+          className="bg-orange-400 text-white text-lg w-2/3 py-4 rounded-md mt-4"
+          onClick={handleClick}
+        >
           PROCEED
         </button>
       </div>

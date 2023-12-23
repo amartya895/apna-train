@@ -6,12 +6,10 @@ import TabNavItem from "./TabNavitem";
 import { allStations } from "../../data/station";
 import { allTrains } from "../../data/train";
 import Search from "../Search";
-import SelectDate from "../SelectDate";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrain, getTrainBetweenStation } from "../../utils/trainDetailSlice";
-import { DatePickerProps } from "antd";
-import { DatePicker, Space } from "antd";
+import { DatePicker } from "antd";
 import {useNavigate} from "react-router-dom";
 
 function Tabs() {

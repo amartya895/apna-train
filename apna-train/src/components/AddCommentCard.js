@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector , useDispatch } from "react-redux";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 import {addTrainReview} from "../utils/trainDetailSlice";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,26 +9,35 @@ const AddCommentCard = ({ currentUser}) => {
   const [text, setText] = useState();
   const trainNumber = useSelector((state) => state.trainDetail.trainno[0]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cUser = JSON.parse(localStorage.getItem("currentUser"));
+  const userName = cUser ? cUser.user.username : null;
   const onSend = async () => {
     try {
-      const reviewDet = {
-        trainNo: trainNumber,
-        userReviews: {
-          userName: currentUser,
-          comment: text,
-        },
-      };
-      const resp = await axios.post("/api/train/comment", reviewDet);
-    dispatch(addTrainReview({
-      userName: currentUser,
-      comment: text,
-      rating:4,
-      dateOfReview:Date.now()
-    }));
-
-    setText("");
-      
-      toast.success(`Response: ${resp.data}`, { position: toast.POSITION.TOP_RIGHT });
+      if(userName)
+      {
+        const reviewDet = {
+          trainNo: trainNumber,
+          userReviews: {
+            userName: currentUser,
+            comment: text,
+          },
+        };
+        const resp = await axios.post("/api/train/comment", reviewDet);
+      dispatch(addTrainReview({
+        userName: currentUser,
+        comment: text,
+        rating:4,
+        dateOfReview:Date.now()
+      }));
+  
+      setText("");
+        
+        toast.success(`Response: ${resp.data}`, { position: toast.POSITION.TOP_RIGHT });
+      }
+      else{
+        navigate("/login");
+      }
     } catch (error) {
         toast.error(`Error: ${error.message}`, { position: toast.POSITION.TOP_RIGHT });
 
