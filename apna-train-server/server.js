@@ -29,6 +29,7 @@ app.use("/api/pnr",bookingRoute);
 app.use("/api/train" , trainRoute);
 app.use("/api/auth" , userRoute);
 app.use("/api/user",travellerRoute);
+app.use("/api/booking",bookingRoute);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port} `);
