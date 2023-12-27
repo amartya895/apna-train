@@ -6,13 +6,11 @@ const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
   };
 
   const [trainNo, trainName] = pnrInfo.trainName.split("-");
-  // const [fromStationCode , fromStationName] = pnrInfo.fromStation.split('-');
-  // const [toStationCode , toStationName] = pnrInfo.toStation.split('-');
   const dateString = pnrInfo.dateOfJourney;
-const dateObject = new Date(dateString);
+  const dateObject = new Date(dateString);
 
-const options = { weekday: 'short', day: 'numeric', month: 'short' };
-const formattedDate = dateObject.toLocaleDateString('en-US', options);
+  const options = { weekday: "short", day: "numeric", month: "short" };
+  const formattedDate = dateObject.toLocaleDateString("en-US", options);
 
   return (
     <div className="">
@@ -45,7 +43,9 @@ const formattedDate = dateObject.toLocaleDateString('en-US', options);
           </span>
         </div>
         <div className="text-base text-gray-500 mt-2 flex">
-          <p>{pnrInfo.fromStation}, 13:55</p>
+          <p>
+            {pnrInfo.fromStation}, {pnrInfo.startTime}
+          </p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -60,10 +60,13 @@ const formattedDate = dateObject.toLocaleDateString('en-US', options);
               d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
           </svg>
-          <p> {pnrInfo.toStation}, 15:45</p>
+          <p>
+            {" "}
+            {pnrInfo.toStation}, {pnrInfo.endTime}
+          </p>
         </div>
         <p className="text-base text-gray-500 mt-2">
-          {formattedDate} | 3A | GN | Expected platform : 7
+          {formattedDate} | {pnrInfo.coachType} | GN | Expected platform : 7
         </p>
       </div>
       <div className="bg-slate-200 rounded-sm mt-10 p-6  shadow-sm">
@@ -105,7 +108,7 @@ const formattedDate = dateObject.toLocaleDateString('en-US', options);
                   CNF | {seat.seatNo} | {seat.seatType}
                 </td>
                 <td>WL/{28 + index}</td>
-                <td>1A</td>
+                <td>{pnrInfo.coachType}</td>
               </tr>
             ))}
           </tbody>

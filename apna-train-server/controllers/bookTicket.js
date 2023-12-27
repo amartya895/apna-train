@@ -23,6 +23,7 @@ export const bookTicket = async (req, res) => {
   try {
     const PNR = generateUniqueNo(10);
     const {
+      userId,
       train,
       fromStation,
       toStation,
@@ -32,6 +33,9 @@ export const bookTicket = async (req, res) => {
       irctcId,
       mobileNo,
       ticketFair,
+      startTime,
+      endTime,
+      coachType,
     } = req.body;
 
     const updatedTravellers = travellers.map((person) => {
@@ -50,6 +54,7 @@ export const bookTicket = async (req, res) => {
     const newTicket = new Ticket({
       PNR: PNR,
       train,
+      userId,
       fromStation,
       toStation,
       dateOfJourney,
@@ -58,6 +63,9 @@ export const bookTicket = async (req, res) => {
       irctcId,
       mobileNo,
       ticketFair,
+      startTime,
+      endTime,
+      coachType,
     });
 
     await newTicket.save();

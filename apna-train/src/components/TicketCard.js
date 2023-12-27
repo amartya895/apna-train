@@ -4,6 +4,12 @@ import QRCode from "react-qr-code";
 import logo from "../images/ApnaTrainLogo.png";
 import { useSelector } from "react-redux";
 const TicketCard = () => {
+  const ticket = useSelector((state) => state.trainDetail.tickets[0]);
+
+  if (!ticket) {
+    return <div>No ticket available</div>;
+  }
+
   const {
     trainName,
     type,
@@ -12,25 +18,21 @@ const TicketCard = () => {
     toStation,
     doj,
     passengers,
-   
-
     randomStartTime,
-  } = useSelector((state) => state.trainDetail.tickets[0]);
+  } = ticket;
 
-  let name, age, gender, nationality ,berthPref;
+  let name, age, gender, nationality, berthPref;
 
-  if (passengers.length > 1) {
-    name = `${passengers[0].name} +${passengers.length - 1}`;
-    age = passengers[0].age;
-    gender = passengers[0].gender;
-    nationality = passengers[0].country;
-    berthPref=passengers[0].berthPref;
+  if (passengers && passengers.length > 0) {
+    const firstPassenger = passengers[0];
+    name = `${firstPassenger.name} +${passengers.length - 1}`;
+    age = firstPassenger.age;
+    gender = firstPassenger.gender;
+    nationality = firstPassenger.country;
+    berthPref = firstPassenger.berthPref;
   } else {
-    name = passengers[0].name;
-    age = passengers[0].age;
-    gender = passengers[0].gender;
-    nationality = passengers[0].country;
-    berthPref=passengers[0].berthPref;
+    // Handle the case when there are no passengers
+    return <div>No passengers available</div>;
   }
 
   const qrDet = `

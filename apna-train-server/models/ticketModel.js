@@ -18,6 +18,10 @@ const berthSchema = new mongoose.Schema(
 
 const ticketSchema = new mongoose.Schema(
   {
+    userId:{
+      type : String,
+      required:true,
+    },
     PNR: {
       type: String,
       required: true,
@@ -82,6 +86,18 @@ const ticketSchema = new mongoose.Schema(
     ticketFair: {
       type: Number,
       required: true,
+    },
+    startTime:{
+      type:String,
+      required:true,
+    },
+    endTime:{
+      type:String,
+      required:true
+    },
+    coachType:{
+      type : String,
+      required:true,
     },
   },
   {

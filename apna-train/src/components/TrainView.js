@@ -1,12 +1,11 @@
 import React from "react";
-import { useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { getBookingTrainDetails } from "../utils/trainDetailSlice";
 
-const TrainView = ({ trainName, trainNo, fromStation, toStation ,doj}) => {
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const TrainView = ({ trainName, trainNo, fromStation, toStation, doj }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const generateRandomPrice = () =>
     Math.floor(Math.random() * (2000 - 500 + 1) + 500);
 
@@ -18,19 +17,26 @@ const TrainView = ({ trainName, trainNo, fromStation, toStation ,doj}) => {
       .padStart(2, "0")}`;
   };
 
-  const handleBookNowClick = (type , price) => {
-    
-    const currentUser = localStorage.getItem('currentUser');
-    if(currentUser)
-    {
-      dispatch(getBookingTrainDetails({trainName,trainNo, type , price , fromStation , toStation , doj ,randomStartTime}));
+  const handleBookNowClick = (type, price) => {
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+      dispatch(
+        getBookingTrainDetails({
+          trainName,
+          trainNo,
+          type,
+          price,
+          fromStation,
+          toStation,
+          doj,
+          randomStartTime,
+          randomEndTime,
+        })
+      );
       navigate("/booknow");
-    }
-    else{
+    } else {
       navigate("/login");
     }
-   
-   
   };
 
   const generateRandomTimeTaken = () =>
@@ -122,11 +128,31 @@ const TrainView = ({ trainName, trainNo, fromStation, toStation ,doj}) => {
       </div>
 
       <div className="flex mt-8 justify-center">
-        <SeatType type="1A" price={randomPrice} onBookNowClick={handleBookNowClick} />
-        <SeatType type="2A" price={randomPrice - 205} onBookNowClick={handleBookNowClick} />
-        <SeatType type="3A" price={randomPrice - 299} onBookNowClick={handleBookNowClick} />
-        <SeatType type="3E" price={randomPrice - 403} onBookNowClick={handleBookNowClick} />
-        <SeatType type="SL" price={randomPrice - 510} onBookNowClick={handleBookNowClick} />
+        <SeatType
+          type="1A"
+          price={randomPrice}
+          onBookNowClick={handleBookNowClick}
+        />
+        <SeatType
+          type="2A"
+          price={randomPrice - 205}
+          onBookNowClick={handleBookNowClick}
+        />
+        <SeatType
+          type="3A"
+          price={randomPrice - 299}
+          onBookNowClick={handleBookNowClick}
+        />
+        <SeatType
+          type="3E"
+          price={randomPrice - 403}
+          onBookNowClick={handleBookNowClick}
+        />
+        <SeatType
+          type="SL"
+          price={randomPrice - 510}
+          onBookNowClick={handleBookNowClick}
+        />
       </div>
     </div>
   );
@@ -134,10 +160,10 @@ const TrainView = ({ trainName, trainNo, fromStation, toStation ,doj}) => {
 
 export default TrainView;
 
-const SeatType = ({ type, price , onBookNowClick }) => {
+const SeatType = ({ type, price, onBookNowClick }) => {
   const handleBookNowClick = () => {
     // Call the callback function with the relevant information
-    onBookNowClick(type , price );
+    onBookNowClick(type, price);
   };
 
   return (
@@ -147,9 +173,13 @@ const SeatType = ({ type, price , onBookNowClick }) => {
         <p>&#8377; {price}</p>
       </div>
       <p className="font-light mt-2">Tap to refresh</p>
-     
-        <p className="text-blue-400 font-normal text-sm mt-2" onClick={handleBookNowClick}>Book now</p>
-      
+
+      <p
+        className="text-blue-400 font-normal text-sm mt-2"
+        onClick={handleBookNowClick}
+      >
+        Book now
+      </p>
     </div>
   );
 };

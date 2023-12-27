@@ -5,6 +5,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { getTickets } from "../utils/trainDetailSlice";
 
 const Booknow = () => {
+
+  const id = JSON.parse(localStorage.getItem("currentUser")).user._id;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [passengers, setPassengers] = useState([]);
@@ -26,6 +29,7 @@ const Booknow = () => {
     toStation,
     doj,
     randomStartTime,
+    randomEndTime,
   } = useSelector((state) => state.trainDetail.bookTrainDet[0]);
 
   const userId = JSON.parse(localStorage.getItem("currentUser")).user._id;
@@ -89,11 +93,13 @@ const Booknow = () => {
         mobNum,
         email,
         randomStartTime,
+        randomEndTime,
       })
     );
 
     try {
       const ticketData = {
+        userId:id,
         train:`${trainNo} - ${trainName}`,
         fromStation: fromStation,
         toStation: toStation,
@@ -103,6 +109,9 @@ const Booknow = () => {
         irctcId: "abc@2345",
         mobileNo: mobNum,
         ticketFair: Number(price),
+        startTime:randomStartTime,
+        endTime:randomEndTime,
+        coachType:type,
       };
 
       const result = await axios.post("/api/booking/booknow", ticketData);
