@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { Outlet, useNavigate } from "react-router-dom";
+import { getTickets } from "../utils/trainDetailSlice";
 
 const Booknow = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [passengers, setPassengers] = useState([]);
   const [fName, setFName] = useState("");
   const [age, setAge] = useState("");
   const [berthPref, setBerthPref] = useState("No Preference");
@@ -10,7 +15,10 @@ const Booknow = () => {
   const [nationality, setNationality] = useState("India");
   const [mobNum, setMobNum] = useState("");
   const [email, setEmail] = useState("");
+  const [hoveredPassenger, setHoveredPassenger] = useState(null);
+
   const {
+    trainNo,
     trainName,
     type,
     price,
@@ -20,26 +28,7 @@ const Booknow = () => {
     randomStartTime,
   } = useSelector((state) => state.trainDetail.bookTrainDet[0]);
 
-  const userId = JSON.parse(localStorage.getItem('currentUser')).user._id;
-
-
-  const handleClick = () => {
-    console.log(
-      trainName,
-      type,
-      price,
-      fromStation,
-      toStation,
-      doj,
-      fName,
-      age,
-      berthPref,
-      gender,
-      nationality,
-      mobNum,
-      email
-    );
-  };
+  const userId = JSON.parse(localStorage.getItem("currentUser")).user._id;
 
   const handleSaveTraveller = async () => {
     console.log(userId);
@@ -58,21 +47,88 @@ const Booknow = () => {
       });
 
       if (result.status === 200) {
+        setPassengers((prevPassengers) => [
+          ...prevPassengers,
+          {
+            id: prevPassengers.length + 1,
+            name: fName,
+            age: Number(age),
+            gender: gender,
+            country: nationality,
+            berthPref :berthPref,
+          },
+        ]);
         setAge("");
         setFName("");
-        setNationality("India")
-        setBerthPref("No Preference")
+        setNationality("India");
+        setBerthPref("No Preference");
         console.log("Traveller details saved successfully");
-       
-        alert("Traveller details saved successfully")
+
+        alert("Traveller details saved successfully");
       } else {
         console.error("Error saving traveller details");
-        
       }
     } catch (error) {
       console.error("Error:", error);
       // Handle other errors
     }
+  };
+
+  const handleClick = async () => {
+    dispatch(
+      getTickets({
+        trainNo,
+        trainName,
+        type,
+        price,
+        fromStation,
+        toStation,
+        doj,
+        passengers,
+        nationality,
+        mobNum,
+        email,
+        randomStartTime,
+      })
+    );
+
+    try {
+      const ticketData = {
+        train:`${trainNo} - ${trainName}`,
+        fromStation: fromStation,
+        toStation: toStation,
+        dateOfJourney: doj,
+        travellers: passengers,
+        email: email,
+        irctcId: "abc@2345",
+        mobileNo: mobNum,
+        ticketFair: Number(price),
+      };
+
+      const result = await axios.post("/api/booking/booknow", ticketData);
+      if (result.status === 200) {
+        alert("Ticket booked successfully");
+      }
+    } catch (error) {
+      console.log("Booking failed");
+    }
+
+    navigate("/myBooking");
+  };
+
+  const handleHover = (id) => {
+    setHoveredPassenger(id);
+  };
+
+  const handleLeave = () => {
+    setHoveredPassenger(null);
+  };
+
+  const handleDeletePassenger = (id) => {
+    setPassengers((prevPassengers) =>
+      prevPassengers.filter((passenger) => passenger.id !== id)
+    );
+    alert("Traveller deleted successfully");
   };
 
   return (
@@ -123,6 +179,51 @@ const Booknow = () => {
             <span className="text-orange-300">Edit</span>
           </div>
         </div>
+        <div className="flex mt-4">
+          {passengers.map((passenger) => (
+            <div
+              key={passenger.id}
+              className="p-6 rounded-md bg-orange-50  shadow-sm mr-3 cursor-pointer  font-semibold text-orange-700  flex justify-center items-center  relative"
+              onMouseEnter={() => handleHover(passenger.id)}
+              onMouseLeave={handleLeave}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 mr-1 cursor-pointer"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+
+              <p>{passenger.name}</p>
+              {hoveredPassenger === passenger.id && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 ml-4 text-black"
+                  onClick={() => handleDeletePassenger(passenger.id)}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+                  />
+                </svg>
+              )}
+            </div>
+          ))}
+        </div>
+
         <div className="bg-white shadow-sm w-2/3 mt-4 p-4 rounded-md">
           <p className="text-base font-medium text-gray-600">
             PASSENGER DETAILS
@@ -319,6 +420,7 @@ const Booknow = () => {
           PROCEED
         </button>
       </div>
+      <Outlet />
     </div>
   );
 };

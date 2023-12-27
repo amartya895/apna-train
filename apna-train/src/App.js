@@ -16,6 +16,7 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import TrainBetween from "./screens/TrainBetween";
 import Booknow from "./screens/Booknow";
+import TicketCard from "./components/TicketCard";
 
 function App() {
   return (
@@ -80,7 +81,13 @@ export const appRouter = createBrowserRouter([
       },
       {
         path:"/booknow",
-        element:<Booknow/>
+        element:<Booknow/>,
+      },
+      {
+        
+          path:"/myBooking",
+          element:<TicketCard/>,
+        
       }
     ],
   },

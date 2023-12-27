@@ -1,6 +1,6 @@
 import Ticket from "../models/ticketModel.js";
 
-import {generateUniqueNo} from "./genralController.js"
+import { generateUniqueNo } from "./genralController.js";
 
 const allocateBerth = (age) => {
   const berthType = ["UB", "LB", "SL", "SU", "MB"];
@@ -23,6 +23,7 @@ export const bookTicket = async (req, res) => {
   try {
     const PNR = generateUniqueNo(10);
     const {
+      train,
       fromStation,
       toStation,
       dateOfJourney,
@@ -30,6 +31,7 @@ export const bookTicket = async (req, res) => {
       email,
       irctcId,
       mobileNo,
+      ticketFair,
     } = req.body;
 
     const updatedTravellers = travellers.map((person) => {
@@ -38,15 +40,16 @@ export const bookTicket = async (req, res) => {
         ...person,
         berth: [
           {
-            seatNo:seatNo,
-            seatType:berth,
+            seatNo: seatNo,
+            seatType: berth,
           },
         ],
       };
     });
-    
+
     const newTicket = new Ticket({
       PNR: PNR,
+      train,
       fromStation,
       toStation,
       dateOfJourney,
@@ -54,13 +57,12 @@ export const bookTicket = async (req, res) => {
       email,
       irctcId,
       mobileNo,
-      ticketFair: Math.floor(Math.random() * 4000),
+      ticketFair,
     });
-    
-    await newTicket.save();
-    
 
-  console.log("Ticket Saved Successfully");    
+    await newTicket.save();
+
+    console.log("Ticket Saved Successfully");
 
     res.status(201).json({ message: "Your Ticket has been Booked" });
   } catch (error) {

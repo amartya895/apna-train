@@ -8,6 +8,12 @@ const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
   const [trainNo, trainName] = pnrInfo.trainName.split("-");
   // const [fromStationCode , fromStationName] = pnrInfo.fromStation.split('-');
   // const [toStationCode , toStationName] = pnrInfo.toStation.split('-');
+  const dateString = pnrInfo.dateOfJourney;
+const dateObject = new Date(dateString);
+
+const options = { weekday: 'short', day: 'numeric', month: 'short' };
+const formattedDate = dateObject.toLocaleDateString('en-US', options);
+
   return (
     <div className="">
       <h1 className="text-4xl font-normal text-center">PNR Status </h1>
@@ -57,7 +63,7 @@ const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
           <p> {pnrInfo.toStation}, 15:45</p>
         </div>
         <p className="text-base text-gray-500 mt-2">
-          Mon, 20 Nov | 3A | GN | Expected platform : 7
+          {formattedDate} | 3A | GN | Expected platform : 7
         </p>
       </div>
       <div className="bg-slate-200 rounded-sm mt-10 p-6  shadow-sm">
@@ -94,11 +100,11 @@ const PnrStatusCard = ({ checkFunction, pnrInfo }) => {
           <tbody className="text-center text-lg">
             {pnrInfo.seatInfo.map((seat, index) => (
               <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td className="text-green-500 text-left flex justify-center">
                   CNF | {seat.seatNo} | {seat.seatType}
                 </td>
-                <td>WL/{28+index}</td>
+                <td>WL/{28 + index}</td>
                 <td>1A</td>
               </tr>
             ))}

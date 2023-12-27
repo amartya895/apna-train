@@ -23,7 +23,7 @@ const TrainView = ({ trainName, trainNo, fromStation, toStation ,doj}) => {
     const currentUser = localStorage.getItem('currentUser');
     if(currentUser)
     {
-      dispatch(getBookingTrainDetails({trainName, type , price , fromStation , toStation , doj ,randomStartTime}));
+      dispatch(getBookingTrainDetails({trainName,trainNo, type , price , fromStation , toStation , doj ,randomStartTime}));
       navigate("/booknow");
     }
     else{

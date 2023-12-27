@@ -25,6 +25,10 @@ const ticketSchema = new mongoose.Schema(
       maxlength: 10,
       minlength: 10,
     },
+    train:{
+      type: String,
+      required: true,
+    },
     fromStation: {
       type: String,
       required: true,
@@ -39,6 +43,10 @@ const ticketSchema = new mongoose.Schema(
     },
     travellers: [
       {
+        id:{
+          type:Number,
+          required:true,
+        },
         name: {
           type: String,
           required: true,
@@ -52,9 +60,10 @@ const ticketSchema = new mongoose.Schema(
           required: true,
         },
         berth: [berthSchema],
+      
         country: {
           type: String,
-          default: "India",
+          required: true,
         },
       },
     ],

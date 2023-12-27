@@ -8,6 +8,7 @@ const trainDetailSlice = createSlice({
     journeyStations: [],
     trainsBetween: [],
     bookTrainDet:[],
+    tickets:[],
   },
   reducers: {
     addTrain: (state, action) => {
@@ -38,6 +39,9 @@ const trainDetailSlice = createSlice({
     getBookingTrainDetails :(state , action)=>{
       state.bookTrainDet=[];
       state.bookTrainDet.push(action.payload);
+    },
+    getTickets:(state , action)=>{
+        state.tickets.push(action.payload);
     }
   },
 });
@@ -48,7 +52,8 @@ export const {
   addTrainReview,
   getJourneyStation,
   getTrainBetweenStation,
-  getBookingTrainDetails
+  getBookingTrainDetails,
+  getTickets,
 } = trainDetailSlice.actions;
 
 export default trainDetailSlice.reducer;

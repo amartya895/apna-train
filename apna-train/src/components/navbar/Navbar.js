@@ -32,7 +32,7 @@ const Navbar = () => {
             <input type="text" placeholder="Search your train " />
             <i className="fa fa-search" aria-hidden="true"></i>
           </div>
-          <a href="/my-booking">
+          <a href="/myBooking">
             <div className="nav-txt-div">
               <p>My Booking</p>
             </div>
