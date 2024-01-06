@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 const RunningStatus = () => {
  
   const trainDet = useSelector((state) => state.trainDetail.trains[0]);
+
+  if (!trainDet) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="bg-pink-100 w-full h-80 rounded-md  p-10">
       <h1 className="text-center text-3xl space-x-1">

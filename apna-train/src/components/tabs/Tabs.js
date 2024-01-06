@@ -10,7 +10,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addTrain, getTrainBetweenStation } from "../../utils/trainDetailSlice";
 import { DatePicker } from "antd";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -89,16 +89,16 @@ export const Firsttab = () => {
     };
 
     try {
-      const result = (await axios.post("/api/train/trainbetweenstation", journeyDet)).data;
+      const result = (
+        await axios.post("/api/train/trainbetweenstation", journeyDet)
+      ).data;
 
       console.log(result);
       dispatch(getTrainBetweenStation(result));
-      
-      if(result)
-      {
-        navigate(`/trainBetween/${fromStation}/${toStation}/${journeyDate}`)
-      }
 
+      if (result) {
+        navigate(`/trainBetween/${fromStation}/${toStation}/${journeyDate}`);
+      }
     } catch (error) {
       console.log("Something went Wrong");
     }
@@ -202,6 +202,36 @@ const Secondtab = () => {
   );
 };
 const Thirdtab = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const trainno = useSelector((state) => state.trainDetail.trainno[0]);
+
+  const fetchTrainInfo = async (trainNo) => {
+    try {
+      console.log("Fetching train data");
+      const response = (
+        await axios.post("/api/train/details", { trainNo: trainNo })
+      ).data;
+      console.log(response, "success");
+      console.log("Before dispatch");
+      dispatch(addTrain(response));
+      console.log("After dispatch");
+
+      console.log("train data dispatch");
+    } catch (error) {
+      console.log("fetching train data failed", error);
+    }
+  };
+
+  const handleSearch = () => {
+    console.log(trainno);
+    fetchTrainInfo(trainno);
+    navigate(`/train-search/${trainno}/running-status`);
+  };
+
+  
+  
   return (
     <div className="flex w-full px-2">
       <div className="w-full">
@@ -210,7 +240,10 @@ const Thirdtab = () => {
           placeholderText="Enter Train No / Name"
         />
       </div>
-      <button className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2">
+      <button
+        className="bg-orange-400 p-3 h-fit text-gray-200 rounded-md shadow-sm hover:bg-orange-500 ml-2"
+        onClick={handleSearch}
+      >
         SEARCH
       </button>
     </div>

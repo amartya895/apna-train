@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { setUser } from "../service/auth.js";
 
 export const signupController = async (req, resp) => {
   const { username, email, password } = req.body;
@@ -34,17 +34,17 @@ export const loginController = async (req, resp) => {
       const check = await bcrypt.compare(password, user.password);
 
       if (check) {
-        // Generate a JWT token upon successful login
-        const token = jwt.sign(
-          { userId: user._id, email: user.email },
-          "amartya is cool",
-          { expiresIn: "1h" } // You can adjust the expiration time
-        );
-
+        const token = setUser(user);
+        resp.cookie("uid", token);
         resp.status(200).send({
           message: "User logged in successfully",
-          user,
           token,
+          user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            travellers: user.travellers,
+          },
         });
       } else {
         resp.status(401).send({ message: "Wrong password" });
