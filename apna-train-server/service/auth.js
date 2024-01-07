@@ -12,10 +12,11 @@ export const setUser = (user) => {
 };
 
 export const getUser = (token) => {
+  
   if (!token) return null;
   try {
     return jwt.verify(token, key);
   } catch (error) {
-    return error;
+    return null;
   }
 };

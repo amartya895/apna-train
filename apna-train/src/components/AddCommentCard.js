@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {addTrainReview} from "../utils/trainDetailSlice";
+import { addTrainReview } from "../utils/trainDetailSlice";
 import "react-toastify/dist/ReactToastify.css";
-const AddCommentCard = ({ currentUser}) => {
+const AddCommentCard = ({ currentUser }) => {
   const [text, setText] = useState();
   const trainNumber = useSelector((state) => state.trainDetail.trainno[0]);
   const dispatch = useDispatch();
@@ -14,8 +14,7 @@ const AddCommentCard = ({ currentUser}) => {
   const userName = cUser ? cUser.user.username : null;
   const onSend = async () => {
     try {
-      if(userName)
-      {
+      if (userName) {
         const reviewDet = {
           trainNo: trainNumber,
           userReviews: {
@@ -24,23 +23,40 @@ const AddCommentCard = ({ currentUser}) => {
           },
         };
         const resp = await axios.post("/api/train/comment", reviewDet);
-      dispatch(addTrainReview({
-        userName: currentUser,
-        comment: text,
-        rating:4,
-        dateOfReview:Date.now()
-      }));
-  
-      setText("");
+        console.log(resp.status);
         
-        toast.success(`Response: ${resp.data}`, { position: toast.POSITION.TOP_RIGHT });
-      }
-      else{
+        dispatch(
+          addTrainReview({
+            userName: currentUser,
+            comment: text,
+            rating: 4,
+            dateOfReview: Date.now(),
+          })
+        );
+
+        setText("");
+
+        toast.success(`Response: ${resp.data}`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
         navigate("/login");
       }
     } catch (error) {
-        toast.error(`Error: ${error.message}`, { position: toast.POSITION.TOP_RIGHT });
-
+      if (
+        axios.isAxiosError(error) &&
+        error.response &&
+        error.response.status === 401
+      ) {
+        // Handle unauthorized access by navigating to the login page
+        localStorage.removeItem("currentUser");
+        window.location.href="/login";
+      } else {
+        // Handle other errors
+        toast.error(`Error: ${error.message}`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
     }
   };
 

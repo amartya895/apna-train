@@ -4,7 +4,7 @@ export const restrictToLoggedinUserOnly = async (req, resp, next) => {
   const userUid = req.cookies?.uid;
 
   if (!userUid) {
-    resp.status(404).send({
+    resp.status(401).send({
       message: "User is not logedin",
     });
   }
@@ -12,7 +12,7 @@ export const restrictToLoggedinUserOnly = async (req, resp, next) => {
   const user = getUser(userUid);
 
   if (!user)
-    return resp.status(404).send({
+    return resp.status(401).send({
       message: "user is not logedin",
     });
 

@@ -10,6 +10,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
     setCurrentUser(null);
+    window.location.reload();
+
   };
   console.log("before use useEffect")
   useEffect(() => {
