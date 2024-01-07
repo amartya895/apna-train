@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
     },
     travellers:{
         type:[],
+    },
+    profilePath:{
+        type : String,
+        required:false,
     }
 
 

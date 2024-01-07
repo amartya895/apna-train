@@ -8,6 +8,8 @@ const Signup = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [cPassword, setCPassword] = useState();
+  const [profileImage, setProfileImage] = useState(null);
+
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const name = currentUser?.user?.username;
@@ -19,14 +21,14 @@ const Signup = () => {
   }, [name, navigate]);
 
   const handleOnSignup = async () => {
-    const userDet = {
-      username,
-      email,
-      password,
-    };
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profileImage", profileImage);
 
     try {
-      await axios.post("/api/auth/signup", userDet);
+      await axios.post("/api/auth/signup", formData);
       const result = await axios.post("/api/auth/login", { email, password });
      
       localStorage.setItem("currentUser", JSON.stringify(result.data));
@@ -36,13 +38,17 @@ const Signup = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    setProfileImage(e.target.files[0]);
+  };
+
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-orange-700 uppercase">
           Sign up
         </h1>
-        <form className="mt-6">
+        <form className="mt-6" enctype="multipart/form-data">
           <div className="mb-2">
             <label
               htmlFor="text"
@@ -98,6 +104,10 @@ const Signup = () => {
               value={cPassword}
               onChange={(e) => setCPassword(e.target.value)}
             />
+          </div>
+
+          <div className="">
+          <input type="file" name="profileImage"  onChange={handleFileChange} />
           </div>
 
           <div className="mt-6">

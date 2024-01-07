@@ -2,18 +2,23 @@ import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { setUser } from "../service/auth.js";
 
+// import { uploadMiddleware } from "../middlewares/upload.js";
+
 export const signupController = async (req, resp) => {
   const { username, email, password } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await new User({
+
+    const user = new User({
       username: username,
       email: email,
       password: hashedPassword,
+      profilePath:req.file.path
     });
 
     const result = await user.save();
+
     resp.status(201).send({
       message: "User created successfully",
       result,
