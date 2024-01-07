@@ -47,5 +47,5 @@
   "devDependencies": {
     "tailwindcss": "^3.3.3"
   },
-  "proxy": "https://apna-train-service.onrender.com"
+  "proxy": "https://apna-train-service.onrender.com/"
 }
