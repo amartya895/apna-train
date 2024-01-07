@@ -16,8 +16,8 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    // origin: "https://renter-khaki.vercel.app", //this is for deployed version
-    origin: "http://localhost:3000", // this is for local development
+    origin: "https://apna-train.vercel.app", //this is for deployed version
+    // origin: "http://localhost:3000", // this is for local development
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
