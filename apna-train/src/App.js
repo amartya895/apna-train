@@ -17,6 +17,7 @@ import Signup from "./screens/Signup";
 import TrainBetween from "./screens/TrainBetween";
 import Booknow from "./screens/Booknow";
 import TicketCard from "./components/TicketCard";
+import Chat from "./screens/Chat";
 
 function App() {
   return (
@@ -88,6 +89,10 @@ export const appRouter = createBrowserRouter([
           path:"/myBooking",
           element:<TicketCard/>,
         
+      },
+      {
+        path:"/chats",
+        element:<Chat/>
       }
     ],
   },

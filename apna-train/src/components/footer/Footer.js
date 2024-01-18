@@ -4,8 +4,15 @@ import help from "../../images/customer-support.png";
 import logo from "../../images/ApnaTrainLogo.png";
 import appstore from "../../images/appstore.png";
 import playstore from "../../images/playstore.png";
+import {useNavigate} from "react-router-dom";
 
 function Footer() {
+
+    const navigate = useNavigate();
+
+  const handleHelp = ()=>{
+    navigate("/chats");
+  }
   return (
     <footer>
       <div className="footer-details">
@@ -58,7 +65,7 @@ function Footer() {
             <p>© Copy right 2014-2022, Stark Enterprises Private Limited </p>
         </div>
       </div>
-      <div className="help-btn">
+      <div className="help-btn" onClick={handleHelp}>
         <img src={help} alt="" />
         <p>Help</p>
       </div>

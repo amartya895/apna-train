@@ -6,7 +6,9 @@ import userRoute from "./routes/userRoute.js"
 import travellerRoute from "./routes/travellerRoute.js"
 import cors from "cors";
 import cookieParser from 'cookie-parser';
+import chatRoute from "./routes/chatRoute.js";
 // import {restrictToLoggedinUserOnly} from "./middlewares/auth.js"
+import messageRoute from "./routes/messageRoute.js";
 
 import dbconfig from "./db.js";
 
@@ -34,6 +36,8 @@ app.use("/api/pnr",bookingRoute);
 app.use("/api/train" , trainRoute);
 app.use("/api/auth" , userRoute);
 app.use("/api/user",travellerRoute);
+app.use("/api/chat",chatRoute);
+app.use("/api/message",messageRoute);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port} `);
