@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
     },
     profilePath:{
         type : String,
-        required:false,
+        
     }
 
 
