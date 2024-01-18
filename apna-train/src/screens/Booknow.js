@@ -45,7 +45,7 @@ const Booknow = () => {
         BerthPref: berthPref,
       };
 
-      const result = await axios.post("/api/user/addTraveller", {
+      const result = await axios.post("https://apna-train-service.onrender.com/api/user/addTraveller", {
         userId,
         travellerDetails,
       });
@@ -114,7 +114,7 @@ const Booknow = () => {
         coachType:type,
       };
 
-      const result = await axios.post("/api/booking/booknow", ticketData);
+      const result = await axios.post("https://apna-train-service.onrender.com/api/booking/booknow", ticketData);
       if (result.status === 200) {
         alert("Ticket booked successfully");
       }

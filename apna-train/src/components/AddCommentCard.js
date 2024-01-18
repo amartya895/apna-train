@@ -22,7 +22,7 @@ const AddCommentCard = ({ currentUser }) => {
             comment: text,
           },
         };
-        const resp = await axios.post("/api/train/comment", reviewDet);
+        const resp = await axios.post("https://apna-train-service.onrender.com/api/train/comment", reviewDet);
         console.log(resp.status);
         
         dispatch(

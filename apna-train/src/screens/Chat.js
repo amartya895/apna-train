@@ -9,7 +9,7 @@ const Chat = () => {
   const [chats , setChats] = useState([]);
 
   const getChats = async()=>{
-    const {data} = await axios.get(`/api/chat/${userId}`);
+    const {data} = await axios.get(`https://apna-train-service.onrender.com/api/chat/${userId}`);
 
     setChats(data);
   }

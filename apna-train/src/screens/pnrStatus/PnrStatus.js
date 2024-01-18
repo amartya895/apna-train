@@ -13,7 +13,7 @@ function PnrStatus() {
 
   const fetchInfo = async (data) => {
     try {
-      const response = await axios.post("/api/pnr/pnrstatus", { pnr: data });
+      const response = await axios.post("https://apna-train-service.onrender.com/api/pnr/pnrstatus", { pnr: data });
 
       setPnrInfo(response.data);
       

@@ -28,8 +28,8 @@ const Signup = () => {
     formData.append("profileImage", profileImage);
 
     try {
-      await axios.post("/api/auth/signup", formData);
-      const result = await axios.post("/api/auth/login", { email, password });
+      await axios.post("https://apna-train-service.onrender.com/api/auth/signup", formData);
+      const result = await axios.post("https://apna-train-service.onrender.com/api/auth/login", { email, password });
      
       localStorage.setItem("currentUser", JSON.stringify(result.data));
       window.location.href="/";

@@ -12,6 +12,7 @@ import { addTrain, getTrainBetweenStation } from "../../utils/trainDetailSlice";
 import { DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 
+
 function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
   return (
@@ -90,7 +91,7 @@ export const Firsttab = () => {
 
     try {
       const result = (
-        await axios.post("/api/train/trainbetweenstation", journeyDet)
+        await axios.post("https://apna-train-service.onrender.com/api/train/trainbetweenstation", journeyDet)
       ).data;
 
       console.log(result);
@@ -211,7 +212,7 @@ const Thirdtab = () => {
     try {
       console.log("Fetching train data");
       const response = (
-        await axios.post("/api/train/details", { trainNo: trainNo })
+        await axios.post("https://apna-train-service.onrender.com/api/train/details", { trainNo: trainNo })
       ).data;
       console.log(response, "success");
       console.log("Before dispatch");

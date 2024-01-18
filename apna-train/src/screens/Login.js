@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const result = await axios.post("/api/auth/login", { email, password });
+      const result = await axios.post("https://apna-train-service.onrender.com/api/auth/login", { email, password });
       localStorage.setItem("currentUser", JSON.stringify(result.data));
       window.location.href ="/";
     } catch (error) {

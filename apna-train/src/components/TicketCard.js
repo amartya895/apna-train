@@ -9,7 +9,7 @@ const TicketCard = () => {
     try {
       const id = JSON.parse(localStorage.getItem("currentUser")).user._id;
 
-      const result = await axios.post("/api/booking/getTickets", {
+      const result = await axios.post("https://apna-train-service.onrender.com/api/booking/getTickets", {
         userId: id,
       });
 
